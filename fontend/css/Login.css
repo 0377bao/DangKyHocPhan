@@ -1,0 +1,117 @@
+/* CSS mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fff;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.container {
+    display: block;
+}
+
+.logo-banner img {
+    width: 100%;
+    height: auto;
+}
+
+.form-login {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    margin: 10% auto;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-login form {
+    width: 100%;
+    line-height: 3em;
+}
+
+.form-login label {
+    font-size: 1em;
+    text-align: left;
+    display: inline;
+}
+
+.form-login input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-login button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.form-login button:hover {
+    background-color: #0056b3;
+}
+
+.footer {
+    margin-top: 20px;
+    position: relative;
+    background-color: #0069d9;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    padding: 10px 0;
+    line-height: 1.5em;
+}
+
+.left-footer {
+    padding: 10px;
+    text-align: left;
+}
+
+.right-footer {
+    padding: 10px;
+}
+
+.footer-butoom {
+    padding: 15px;
+    text-align: center;
+    background-color: #0099FF;
+    color: #fff;
+    font-size: 10px;
+}
+
+/* Media queries */
+@media only screen and (max-width: 600px) {
+    .form-login {
+        margin: 10% auto;
+        padding: 10px; /* Điều chỉnh padding cho phù hợp với kích thước nhỏ hơn */
+        max-width: 90%; /* Giảm kích thước tối đa của form login */
+    }
+    
+    .footer {
+        flex-direction: column; /* Chuyển sang kiểu hiển thị dọc khi màn hình nhỏ hơn */
+        align-items: center; /* Căn giữa nội dung trong footer */
+    }
+    
+    .footer-butoom {
+        font-size: 8px; /* Giảm kích thước font chân trang */
+    }
+}
