@@ -1,4 +1,4 @@
 package iuh.models;
 
-public class Subject {
+public class Course {
 }
