@@ -1,10 +1,6 @@
 package iuh.dangkyhocphan.models;
 
 import jakarta.persistence.*;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

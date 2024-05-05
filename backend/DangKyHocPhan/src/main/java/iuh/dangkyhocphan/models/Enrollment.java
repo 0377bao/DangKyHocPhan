@@ -1,10 +1,7 @@
 package iuh.dangkyhocphan.models;
 
-import jakarta.persistence.*;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity

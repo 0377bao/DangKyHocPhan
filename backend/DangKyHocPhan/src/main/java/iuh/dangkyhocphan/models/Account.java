@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "accounts")
 public class Account {
     @Id
-    @OneToOne(mappedBy = "user_id")
+    @OneToOne
+    @JoinColumn(name = "tenTaiKhoan")
     private User user;
     private String matKhau;
     private String vaiTro;
@@ -52,4 +53,5 @@ public class Account {
                 ", vaiTro='" + vaiTro + '\'' +
                 '}';
     }
+
 }
