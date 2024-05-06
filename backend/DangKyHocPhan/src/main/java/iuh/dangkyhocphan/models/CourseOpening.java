@@ -12,13 +12,16 @@ public class CourseOpening {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String hocky;
+
     @OneToMany
     private List<Course> dsKhoaHoc = new ArrayList<>();
 
     public CourseOpening() {
     }
 
-    public CourseOpening(List<Course> dsKhoaHoc) {
+    public CourseOpening(String hocky, List<Course> dsKhoaHoc) {
+        this.hocky = hocky;
         this.dsKhoaHoc = dsKhoaHoc;
     }
 
@@ -34,10 +37,19 @@ public class CourseOpening {
         this.dsKhoaHoc = dsKhoaHoc;
     }
 
+    public String getHocky() {
+        return hocky;
+    }
+
+    public void setHocky(String hocky) {
+        this.hocky = hocky;
+    }
+
     @Override
     public String toString() {
         return "CourseOpening{" +
                 "id=" + id +
+                ", hocky='" + hocky + '\'' +
                 ", dsKhoaHoc=" + dsKhoaHoc +
                 '}';
     }

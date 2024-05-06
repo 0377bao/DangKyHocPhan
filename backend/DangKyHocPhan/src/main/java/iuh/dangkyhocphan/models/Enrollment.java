@@ -17,7 +17,7 @@ public class Enrollment {
     @JoinColumn(name = "class_id")
     private Clazz clazz;
 
-    @OneToOne(mappedBy = "id")
+    @OneToOne
     private ResultCourse resultCourse;
 
     private LocalDate ngayBatDau;
