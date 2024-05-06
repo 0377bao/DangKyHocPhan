@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Home Page</title>
+    <link rel="stylesheet" href="../css/LoginHomePage.css">
+</head>
+<body>
+    <div class="container">
+        <!-- header -->
+        <div class="header">
+            <img src="../img/logo-svd516f114-e-e.png" alt="">
+        </div>
+
+        <!-- content -->
+        <div class="content">
+            <div class="content-both">
+                <div class="content-left">
+                    <a href="">TIN TỨC - SỰ KIỆN</a>
+                    <a href="">THÔNG TIN GIỜ HỌC</a>
+                    <div class="content-action1">
+                        <button type="button">Tháng 01</button>
+                        <label for="">THƯ CHÚC TẾT</label> <br>
+                        <p>ㅤㅤ</p>
+                        <h3>25</h3>
+                    </div>
+
+                    <div class="content-action1">
+                        <button type="button">Tháng 01</button>
+                        <label for="">Thông báo v/v đăng ký học phần học kỳ 2, năm 2023 - 2024 <br></label> <br>
+                        <p>Thông báo v/v đăng ký học phần và đóng học phí học kỳ 2, năm học 2023 – 2024</p>
+                        <h3>08</h3>
+                    </div>
+
+                    <div class="content-action1">
+                        <button type="button">Tháng 02</button>
+                        <label for="">IUH đoạn nhận 4 chương trường đào tạo đạt chuẩn AUN-QA ngày nhà giáo Việt Nam 20/11 <br></label> <br>
+                        <p>IUH đoạn nhận 4 chương trường đào tạo đạt chuẩn AUN-QA ngày nhà giáo Việt Nam 20/11</p>
+                        <h3>13</h3>
+                    </div>
+                </div>
+
+                <!-- Login -->
+                <div class="content-right">
+                    <h2>CỔNG THÔNG TIN <br> SINH VIÊN</h2>
+                    <h3>ĐĂNG NHẬP HỆ THỐNG</h3>
+
+                    <div class="form-login">
+                        <form id="loginForm" method="POST">
+                            <div>
+                                <input type="text" id="masv" name="masv" placeholder="Nhập mã sinh viên">
+                            </div>
+                            <div>
+                                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu">
+                            </div>
+                            <div>
+                                <button type="button" onclick="login()">ĐĂNG NHẬP</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function login() {
+            // Thực hiện xử lý đăng nhập ở đây nếu cần
+    
+            // Chuyển hướng sang trang Home.html
+            window.location.href = "HomePage.html";
+        }
+    </script>
+</body>
+</html>
