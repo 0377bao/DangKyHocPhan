@@ -2,9 +2,11 @@ package iuh.dangkyhocphan.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "accounts")
-public class Account {
+public class Account implements Serializable {
     @Id
     @OneToOne
     @JoinColumn(name = "tenTaiKhoan")

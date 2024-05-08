@@ -2,12 +2,13 @@ package iuh.dangkyhocphan.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "resultCourses")
-public class ResultCourse {
+public class ResultCourse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resultCourse_id")

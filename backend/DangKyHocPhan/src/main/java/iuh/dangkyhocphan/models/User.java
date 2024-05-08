@@ -2,13 +2,13 @@ package iuh.dangkyhocphan.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
-@DiscriminatorColumn(name = "Discriminator", discriminatorType = DiscriminatorType.STRING)
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class User {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("student")
+@Table(name = "students")
 public class Student extends User{
     private String bacDaoTao;
     private String loaiHinhDaoTao;
@@ -97,7 +97,6 @@ public class Student extends User{
                 ", ngayVaoTruong=" + ngayVaoTruong +
                 ", lopHoc='" + lopHoc + '\'' +
                 ", nienKhoa='" + nienKhoa + '\'' +
-                ", dsDangKy=" + dsDangKy +
                 ", id=" + id +
                 ", hoTen='" + hoTen + '\'' +
                 ", ngaySinh=" + ngaySinh +

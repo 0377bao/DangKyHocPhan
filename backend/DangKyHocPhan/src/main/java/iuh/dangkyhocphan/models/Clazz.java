@@ -1,27 +1,26 @@
 package iuh.dangkyhocphan.models;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "classes")
-public class Clazz {
+public class Clazz implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "class_id")
     private Long id;
     private String tenLop;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id")
     private Teacher giangVien;
     private int siSoHienTai;
     private int siSoToiDa;
     private String trangThai;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
     private Course course;
-    @OneToOne
-    @JoinColumn(name = "schedule_id")
-    private Schedule schedule;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "administrator_id")
     private Administrator administrator;
 
@@ -35,7 +34,6 @@ public class Clazz {
                 ", siSoToiDa=" + siSoToiDa +
                 ", trangThai='" + trangThai + '\'' +
                 ", course=" + course +
-                ", schedule=" + schedule +
                 ", administrator=" + administrator +
                 '}';
     }
@@ -95,15 +93,6 @@ public class Clazz {
     public void setCourse(Course course) {
         this.course = course;
     }
-
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
-    }
-
     public Administrator getAdministrator() {
         return administrator;
     }
@@ -115,14 +104,13 @@ public class Clazz {
     public Clazz() {
     }
 
-    public Clazz(String tenLop, Teacher giangVien, int siSoHienTai, int siSoToiDa, String trangThai, Course course, Schedule schedule, Administrator administrator) {
+    public Clazz(String tenLop, Teacher giangVien, int siSoHienTai, int siSoToiDa, String trangThai, Course course, Administrator administrator) {
         this.tenLop = tenLop;
         this.giangVien = giangVien;
         this.siSoHienTai = siSoHienTai;
         this.siSoToiDa = siSoToiDa;
         this.trangThai = trangThai;
         this.course = course;
-        this.schedule = schedule;
         this.administrator = administrator;
     }
 }

@@ -1,36 +1,45 @@
 package iuh.dangkyhocphan.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "courses")
-public class Course {
+public class Course implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
     private Long id;
+    @Column(unique = true, nullable = false, length = 300)
     private String tenMonHoc;
     private int soTinChi;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Course> monTienQuyet;
     private int hocPhi;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> khoa;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> chuyenNganh;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "course_opening_id")
+    private CourseOpening courseOpening;
 
-    public Course(String tenMonHoc, int soTinChi, List<Course> monTienQuyet, int hocPhi, List<String> khoa, List<String> chuyenNganh) {
+
+    public Course() {
+    }
+
+    public Course(String tenMonHoc, int soTinChi, List<Course> monTienQuyet, int hocPhi, List<String> khoa, List<String> chuyenNganh, CourseOpening courseOpening) {
         this.tenMonHoc = tenMonHoc;
         this.soTinChi = soTinChi;
         this.monTienQuyet = monTienQuyet;
         this.hocPhi = hocPhi;
         this.khoa = khoa;
         this.chuyenNganh = chuyenNganh;
-    }
-
-    public Course() {
+        this.courseOpening = courseOpening;
     }
 
     public Long getId() {
@@ -96,5 +105,13 @@ public class Course {
 
     public void setChuyenNganh(List<String> chuyenNganh) {
         this.chuyenNganh = chuyenNganh;
+    }
+
+    public CourseOpening getCourseOpening() {
+        return courseOpening;
+    }
+
+    public void setCourseOpening(CourseOpening courseOpening) {
+        this.courseOpening = courseOpening;
     }
 }

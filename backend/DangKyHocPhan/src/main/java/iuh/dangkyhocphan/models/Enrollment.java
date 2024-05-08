@@ -2,18 +2,22 @@ package iuh.dangkyhocphan.models;
 
 
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
+@IdClass(EnrollmentId.class)
 @Table(name = "enrollments")
-public class Enrollment {
+public class Enrollment implements Serializable {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
     private Student student;
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "class_id")
     private Clazz clazz;
 
@@ -82,6 +86,19 @@ public class Enrollment {
 
     public void setHocKi(String hocKi) {
         this.hocKi = hocKi;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Enrollment that = (Enrollment) o;
+        return Objects.equals(student, that.student) && Objects.equals(clazz, that.clazz);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(student, clazz);
     }
 
     @Override
