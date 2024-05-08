@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Ministry</title>
     <link rel="stylesheet" type="text/css" href="../css/Register.css">
 </head>
 <body>
@@ -19,10 +19,10 @@
 
            <div class="menu-personal">
                 <p>Xin chào!</p>
-                <p><h2>Lê Hữu Bằng</h2></p>
-                <p>Giới tính: </p>
-                <p>MSSV:</p>
-                <p>Trạng thái:</p>
+                <p><h3>Nguyễn Ngọc Phượng</h3></p>
+                <p>Giới tính:ㅤㅤㅤㅤNữ</p>
+                <p>SĐT:ㅤㅤㅤㅤㅤㅤ0964709810</p>
+                <p>Chức vụ:ㅤㅤㅤㅤGiáo vụ</p>
 
                 <button type="submit" onclick="login()">Đăng xuất</button>
            </div>
@@ -35,19 +35,18 @@
 
             <!-- Menu đăng ký học phần -->
             <div class="menu-item">
-                <a href="Home.html">THÔNG TIN SINH VIÊN</a> <br>
-                <a href="Register.html">ĐĂNG KÝ HỌC PHẦN</a> <br>
-                <a href="Programme.html">CHƯƠNG TRÌNH KHUNG</a>
+                <a href="HomeMinistry.html">THÔNG TIN GIẢNG VIÊN</a> <br>
+                <a href="Ministry.html">TẠO LỚP HỌC PHẦN</a> <br>
             </div>
         </div>
 
         <!-- content -->
         <div class="content">
-            <h2>ĐĂNG KÝ HỌC PHẦN</h2> <br>
+            <h2>TẠO LỚP HỌC PHẦN</h2> <br>
             <div class="content-both">
                 <!-- Đợi đăng ký -->
                 <div class="content-register">
-                    <b>Đợt đăng ký</b>
+                    <b>Đợt tạo lớp</b>
 
                     <!-- Chọn học kỳ: -->
                     <Select>
@@ -55,68 +54,34 @@
                         <option value="2">HK1 (2024- 2025)</option>
                         <option value="3">HK2 (2024- 2025)</option>
                     </Select>
-
-
-                    <!-- Radio -->
-                    <input type="radio" id="hocMoi" name="gender" value="hocMoi">
-                    <label for="hocMoi">HỌC MỚI</label>
-            
-                    <input type="radio" id="hocLai" name="gender" value="hocLai">
-                    <label for="hocLai">HỌC LẠI</label>
-            
-                    <input type="radio" id="hocCaiThien" name="gender" value="hocCaiThien">
-                    <label for="hocCaiThien">HỌC CẢI THIỆN</label>
                 </div>
 
-                <!-- Mon hoc phần đang chời đang ký -->
                 <div class="content-subject">
-                    <h3>MÔN HỌC PHẦN ĐANG CHỜ ĐĂNG KÝ</h3>
+                    <h3>LỚP HỌC PHẦN</h3>
                     <form action="" class="table-register">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>ㅤㅤ</th>
-                                    <th>STT</th>
-                                    <th>Mã MH cũ</th>
-                                    <th>Mã HP</th>
-                                    <th>Tên môn học</th>
-                                    <th>TC</th>
-                                    <th>Bắc buộc</th>
-                                    <th>Học phần: học trước (a), tiên <br> quyết (b), song hành (c)</th>
-                                    <th>Học phần tương đương</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </form>
-
-                </div>
-
-                <div class="content-subject">
-                    <h3>LỚP HỌC PHẦN CHỜ ĐĂNG KÝ</h3>
-                    <form action="" class="table-register">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ㅤㅤ</th>
                                     <th>STT</th>
                                     <th>Mã LHP</th>
                                     <th>Tên Lớp học phần</th>
+                                    <th>Lịch học</th>
+                                    <th>Nhóm TH</th>
+                                    <th>Phòng</th>
+                                    <th>Dãy nhà</th>
+                                    <th>Giảng viên</th>
                                     <th>Lớp dự kiến</th>
                                     <th>Sĩ số tối đa</th>
-                                    <th>Đã đăng ký</th>
-                                    <th>Trạng thái</th>
+                                    <th>Thời gian</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
                     </form>
-
+                    <button type="submit" class="register-subject">Tạo lớp học phần</button>
                 </div>
-
-
                 <div class="content-subject">
-                    <h3>CHI TIẾT LỚP HỌC PHẦN</h3>
+                    <h3>THÔNG TIN LỚP HỌC PHẦN</h3>
                     <div class="content-honestly">
                         <label>Nhóm thực hành</label>
                         <Select>
@@ -129,50 +94,19 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
+                                    <th>Mã LHP</th>
+                                    <th>Tên Lớp học phần</th>
                                     <th>Lịch học</th>
-                                    <th>Nhóm TH</th>
                                     <th>Phòng</th>
                                     <th>Dãy nhà</th>
-                                    <th>Cơ sở</th>
                                     <th>Giảng viên</th>
-                                    <th>Thời gian</th>
-                                    <th>ㅤㅤ</th>
+                                    <th>Lớp dự kiến</th>
+                                    <th>Sĩ số tối đa</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
                     </form>
-
-                    <button type="submit" class="register-subject">Đăng ký môn học</button>
-
-                </div>
-
-
-                <div class="content-subject">
-                    <h3>LỚP HỌC PHẦN ĐÃ ĐĂNG KÝ TRONG KÌ HỌC NÀY</h3>
-                    <form action="" class="table-register">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Thao tác</th>
-                                    <th>STT</th>
-                                    <th>Mã LHP</th>
-                                    <th>Tên môn học</th>
-                                    <th>Lớp học dự kiến</th>
-                                    <th>Số TC</th>
-                                    <th>Nhóm TH</th>
-                                    <th>Học Phí</th>
-                                    <th>Hạn nộp</th>
-                                    <th>Thu</th>
-                                    <th>Trạng thái ĐK</th>
-                                    <th>Ngày Đk</th>
-                                    <th>Trạng Thái LHP</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </form>
-
 
                 </div>
 
@@ -191,8 +125,8 @@
     
             <div class="right-footer">
                 <p>Thống kê truy cập</p> 
-                <p>Lượt truy cập: 2038569</p> 
-                <p>Đang online: 345</p>
+                <p>Lượt truy cập: 1000</p> 
+                <p>Đang online: 34</p>
             </div>
         </div>
 
@@ -207,7 +141,7 @@
             // Thực hiện xử lý đăng nhập ở đây nếu cần
     
             // Chuyển hướng sang trang Home.html
-            window.location.href = "LoginRegister.html";
+            window.location.href = "LoginMinistry.html";
         }
     </script>
 </body>
