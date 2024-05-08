@@ -1,11 +1,12 @@
 package iuh.dangkyhocphan.models;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
 @Entity
-@DiscriminatorValue("administrator")
+@Table(name="administrators")
 public class Administrator extends User{
     private int soNamCongTac;
 

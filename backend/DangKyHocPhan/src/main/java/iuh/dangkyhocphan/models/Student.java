@@ -1,12 +1,13 @@
 package iuh.dangkyhocphan.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("student")
+@Table(name = "students")
 public class Student extends User{
     private String bacDaoTao;
     private String loaiHinhDaoTao;
@@ -15,6 +16,7 @@ public class Student extends User{
     private String lopHoc;
     private String nienKhoa;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "student")
     private List<Enrollment> dsDangKy = new ArrayList<>();
 
@@ -97,7 +99,6 @@ public class Student extends User{
                 ", ngayVaoTruong=" + ngayVaoTruong +
                 ", lopHoc='" + lopHoc + '\'' +
                 ", nienKhoa='" + nienKhoa + '\'' +
-                ", dsDangKy=" + dsDangKy +
                 ", id=" + id +
                 ", hoTen='" + hoTen + '\'' +
                 ", ngaySinh=" + ngaySinh +

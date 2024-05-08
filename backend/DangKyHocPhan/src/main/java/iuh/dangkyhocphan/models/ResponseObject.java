@@ -2,22 +2,22 @@ package iuh.dangkyhocphan.models;
 
 import java.util.List;
 
-public class RepositoryObject {
-    private int status;
+public class ResponseObject {
+    private String status;
     private String message;
-    private List<?> data;
+    private Object data;
 
-    public RepositoryObject(int status, String message, List<?> data) {
+    public ResponseObject(String status, String message, Object data) {
         this.status = status;
         this.message = message;
         this.data = data;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -29,11 +29,11 @@ public class RepositoryObject {
         this.message = message;
     }
 
-    public List<?> getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(List<?> data) {
+    public void setData(Object data) {
         this.data = data;
     }
 

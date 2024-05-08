@@ -2,26 +2,34 @@ package iuh.dangkyhocphan.models;
 
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
+@IdClass(EnrollmentId.class)
 @Table(name = "enrollments")
-public class Enrollment {
+public class Enrollment implements Serializable {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
     private Student student;
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "class_id")
     private Clazz clazz;
 
     @OneToOne
     private ResultCourse resultCourse;
 
+    @Id
     private LocalDate ngayBatDau;
+    @Id
     private LocalDate ngayKetThuc;
+    @Id
     private String hocKi;
 
     public Enrollment() {
@@ -82,6 +90,18 @@ public class Enrollment {
 
     public void setHocKi(String hocKi) {
         this.hocKi = hocKi;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Enrollment that)) return false;
+        return Objects.equals(getStudent(), that.getStudent()) && Objects.equals(getClazz(), that.getClazz()) && Objects.equals(getNgayBatDau(), that.getNgayBatDau()) && Objects.equals(getNgayKetThuc(), that.getNgayKetThuc()) && Objects.equals(getHocKi(), that.getHocKi());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getStudent(), getClazz(), getNgayBatDau(), getNgayKetThuc(), getHocKi());
     }
 
     @Override

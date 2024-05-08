@@ -2,20 +2,21 @@ package iuh.dangkyhocphan.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "resultCourses")
-public class ResultCourse {
+public class ResultCourse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resultCourse_id")
     private Long id;
     private double diemGiuaKi;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<Double> diemThuongKi = new ArrayList<>();
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<Double> diemThucHanh = new ArrayList<>();
     private double diemCuoiKi;
     private String ghiChu;

@@ -1,9 +1,11 @@
 package iuh.dangkyhocphan.models;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "schedules")
-public class Schedule {
+public class Schedule implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_id")
@@ -15,6 +17,10 @@ public class Schedule {
     private String tietHoc;
     private String ghiChu;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "class_id")
+    private Clazz clazz;
+
     @Override
     public String toString() {
         return "Schedule{" +
@@ -24,6 +30,7 @@ public class Schedule {
                 ", phongHoc='" + phongHoc + '\'' +
                 ", tietHoc='" + tietHoc + '\'' +
                 ", ghiChu='" + ghiChu + '\'' +
+                ", clazz=" + clazz +
                 '}';
     }
 
@@ -71,14 +78,23 @@ public class Schedule {
         this.ghiChu = ghiChu;
     }
 
+    public Clazz getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Clazz clazz) {
+        this.clazz = clazz;
+    }
+
     public Schedule() {
     }
 
-    public Schedule(Day thu, String loaiLich, String phongHoc, String tietHoc, String ghiChu) {
+    public Schedule(Day thu, String loaiLich, String phongHoc, String tietHoc, String ghiChu, Clazz clazz) {
         this.thu = thu;
         this.loaiLich = loaiLich;
         this.phongHoc = phongHoc;
         this.tietHoc = tietHoc;
         this.ghiChu = ghiChu;
+        this.clazz = clazz;
     }
 }
