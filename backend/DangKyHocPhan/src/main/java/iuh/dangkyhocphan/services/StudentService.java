@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class StudentService implements IService<Student, Long>{
     @Autowired
-    StudentRepository repository;
+    private StudentRepository repository;
     @Override
     public Student save(Student entity) {
         return repository.save(entity);
@@ -29,11 +29,13 @@ public class StudentService implements IService<Student, Long>{
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+
     }
 
     @Override
     public void deleteAll() {
         repository.deleteAll();
+
     }
 
     @Override

@@ -41,16 +41,21 @@ public class EnrollmentService implements IService<Enrollment, Long>{
         return repository.existsById(id);
     }
 
-
-    public List<Enrollment> findAllEnrollmentByStudentId(Long studentId) {
-        return repository.findEnrollmentOfStudent(studentId);
-    }
-
     public List<Enrollment> findEnrollmentOfStudent(Long id) {
         return repository.findEnrollmentOfStudent(id);
     }
     public List<String> findSemesterOfStudent(Long id) {
         return repository.findSemesterOfStudent(id);
 
+    }
+
+    public boolean deleteEnrollmentByStudentIdAndClazzId(Long studentId, Long clazzId) {
+       Enrollment foundEnrollment = repository.findEnrollmentByStudentIdAndClazzId(studentId, clazzId);
+        try{
+            repository.delete(foundEnrollment);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }
