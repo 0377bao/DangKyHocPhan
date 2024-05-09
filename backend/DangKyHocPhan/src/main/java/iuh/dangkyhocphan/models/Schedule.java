@@ -10,7 +10,6 @@ public class Schedule implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_id")
     private Long id;
-
     @Enumerated(EnumType.STRING)
     private Day thu;
     private String loaiLich;
