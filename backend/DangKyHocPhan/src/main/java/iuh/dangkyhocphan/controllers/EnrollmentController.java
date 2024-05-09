@@ -31,7 +31,7 @@ public class EnrollmentController {
     // find list enrollment by student id
     @GetMapping("/{id}")
     public ResponseEntity<ResponseObject> getAllEnrollmentByStudentId(@PathVariable Long id) {
-        List<Enrollment> enrollmentList = enrollmentService.findAllEnrollmentByStudentId(id);
+        List<Enrollment> enrollmentList = enrollmentService.findEnrollmentOfStudent(id);
         List<Map> dsDangKy = new ArrayList<>();
         if(enrollmentList.size() != 0) {
             enrollmentList.forEach(enrollItem -> {

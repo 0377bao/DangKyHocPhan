@@ -1,43 +1,49 @@
 package iuh.dangkyhocphan;
 
 import iuh.dangkyhocphan.models.*;
+
 import iuh.dangkyhocphan.repositories.*;
 import iuh.dangkyhocphan.services.ClazzService;
 import iuh.dangkyhocphan.services.CourseOpeningService;
 import iuh.dangkyhocphan.services.EnrollmentService;
+
+import iuh.dangkyhocphan.services.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
-public class DangKyHocPhanApplication implements CommandLineRunner{
+public class DangKyHocPhanApplication implements CommandLineRunner {
+
 
     public static void main(String[] args) {
         SpringApplication.run(DangKyHocPhanApplication.class, args);
     }
 
-    @Autowired
-    private CourseOpeningService service;
-    @Autowired
-    private CourseRepository repository;
-    @Autowired
-    private ClazzService clazzService;
-    @Autowired
-    private ScheduleRepository scheduleRepository;
-    @Autowired
-    private EnrollmentService enrollmentService;
-    @Autowired
-    private AdministratorRepository administratorRepository;
-    @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
-    private TeacherRepository teacherRepository;
-    @Override
-    public void run(String... args) throws Exception {
+     @Autowired
+     private CourseOpeningService service;
+     @Autowired
+     private CourseRepository repository;
+     @Autowired
+     private ClazzService clazzService;
+     @Autowired
+     private ScheduleRepository scheduleRepository;
+     @Autowired
+     private EnrollmentService enrollmentService;
+     @Autowired
+     private AdministratorRepository administratorRepository;
+     @Autowired
+     private StudentRepository studentRepository;
+     @Autowired
+     private TeacherRepository teacherRepository;
+     @Override
+   public void run(String... args) throws Exception {
 //        List<Course> dsKhoaHoc = List.of(
 //                new Course( "Nhập môn Tin học", 2, List.of(), 1420000, List.of("CNTT"), List.of("SE"), null),
 //                new Course("kỹ năng làm việc nhóm", 2,  List.of(), 1420000, List.of("CNTT"), List.of("SE"), null),
@@ -151,6 +157,7 @@ public class DangKyHocPhanApplication implements CommandLineRunner{
 //        Enrollment e = enrollmentService.findById(1L);
 //        System.out.println(e);
 
+
 //        Enrollment e = enrollmentService.findById(1L);
 //        System.out.println(e);
 //        try{
@@ -161,4 +168,7 @@ public class DangKyHocPhanApplication implements CommandLineRunner{
 //            ex.printStackTrace();
 //        }
     }
+
+   // }
+
 }

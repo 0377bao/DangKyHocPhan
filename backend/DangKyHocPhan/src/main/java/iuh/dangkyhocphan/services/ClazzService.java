@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClazzService implements IService<Clazz, Long> {
+public class ClazzService implements IService<Clazz, Long>{
     @Autowired
     private ClazzRepository repository;
-    @Autowired
+     @Autowired
     private ScheduleRepository scheduleRepository;
+
     @Override
     public Clazz save(Clazz entity) {
         return repository.save(entity);
@@ -32,20 +33,12 @@ public class ClazzService implements IService<Clazz, Long> {
 
     @Override
     public void deleteById(Long id) {
-        try {
-            repository.deleteById(id);
-        } catch (Exception e) {
-            throw new RuntimeException("Clazz can't be deleted!");
-        }
+        repository.deleteById(id);
     }
 
     @Override
     public void deleteAll() {
-        try {
-            repository.deleteAll();
-        } catch (Exception e) {
-            throw new RuntimeException("Clazzs can't be deleted!");
-        }
+        repository.deleteAll();
     }
 
     @Override
@@ -56,4 +49,5 @@ public class ClazzService implements IService<Clazz, Long> {
     public List<Schedule> findScheduleOfClazz(Long clazzId) {
         return scheduleRepository.findAllScheduleOfCourseByCourseId(clazzId);
     }
+
 }

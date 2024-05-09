@@ -3,7 +3,6 @@ package iuh.dangkyhocphan.models;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -95,13 +94,15 @@ public class Enrollment implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Enrollment that)) return false;
-        return Objects.equals(getStudent(), that.getStudent()) && Objects.equals(getClazz(), that.getClazz()) && Objects.equals(getNgayBatDau(), that.getNgayBatDau()) && Objects.equals(getNgayKetThuc(), that.getNgayKetThuc()) && Objects.equals(getHocKi(), that.getHocKi());
+        if (o == null || getClass() != o.getClass()) return false;
+        Enrollment that = (Enrollment) o;
+        return Objects.equals(student, that.student) && Objects.equals(clazz, that.clazz);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getStudent(), getClazz(), getNgayBatDau(), getNgayKetThuc(), getHocKi());
+        return Objects.hash(student, clazz);
     }
 
     @Override

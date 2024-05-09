@@ -16,7 +16,6 @@ public class Schedule implements Serializable {
     private String phongHoc;
     private String tietHoc;
     private String ghiChu;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "class_id")
     private Clazz clazz;

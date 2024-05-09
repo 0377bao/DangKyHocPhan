@@ -18,7 +18,7 @@ public class Student extends User{
 
     @JsonIgnore
     @OneToMany(mappedBy = "student")
-    private List<Enrollment> dsDangKy = new ArrayList<>();
+    private transient List<Enrollment> dsDangKy = new ArrayList<>();
 
     public Student() {
     }
