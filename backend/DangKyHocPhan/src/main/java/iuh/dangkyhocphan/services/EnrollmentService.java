@@ -51,7 +51,7 @@ public class EnrollmentService implements IService<Enrollment, Long>{
     }
 
     public boolean deleteEnrollmentByStudentIdAndClazzId(Long studentId, Long clazzId) {
-       Enrollment foundEnrollment = repository.findEnrollmentByClazzId(studentId, clazzId);
+       Enrollment foundEnrollment = repository.findEnrollmentByStudentIdAndClazzId(studentId, clazzId);
         try{
             repository.delete(foundEnrollment);
             return true;

@@ -143,17 +143,17 @@ public class DangKyHocPhanApplication implements CommandLineRunner {
 //        clazzService.save(clazz);
 //        clazzService.save(clazz1);
 //        Clazz clazz = clazzService.findById(1L);
-     Clazz clazz1 = clazzService.findById(2L);
+     //Clazz clazz1 = clazzService.findById(2L);
 //        Schedule schedule = new Schedule(Day.MONDAY, "Lý thuyết", "X10.1", "10-12", "Tuần 1-15", clazz);
 //        Schedule schedule1 = new Schedule(Day.TUESDAY, "Lý thuyết", "X11.1", "10-12", "Tuần 1-15", clazz1);
 //        scheduleRepository.save(schedule);
 //        scheduleRepository.save(schedule1);
-    Student s1 = studentRepository.findById(2L).get();
+   // Student s1 = studentRepository.findById(2L).get();
 //        System.out.println(s1);
 //        Enrollment e = new Enrollment(s1, clazz, null, LocalDate.of(2024, 3,1), LocalDate.now(), "Học kỳ 1 (2021-2022)");
-   Enrollment e1 = new Enrollment(s1, clazz1, null, LocalDate.of(2024, 3,2), LocalDate.now(), "Học kỳ 1 (2021-2022)");
+  // Enrollment e1 = new Enrollment(s1, clazz1, null, LocalDate.of(2024, 3,2), LocalDate.now(), "Học kỳ 1 (2021-2022)");
 //        enrollmentService.save(e);
-    enrollmentService.save(e1);
+    //enrollmentService.save(e1);
 //        Enrollment e = enrollmentService.findById(1L);
 //        System.out.println(e);
 
