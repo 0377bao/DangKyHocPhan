@@ -1,33 +1,30 @@
 package iuh.dangkyhocphan.services;
 
-import iuh.dangkyhocphan.models.Clazz;
 import iuh.dangkyhocphan.models.Schedule;
-import iuh.dangkyhocphan.repositories.ClazzRepository;
-import iuh.dangkyhocphan.repositories.ScheduleRepository;
+import iuh.dangkyhocphan.respositories.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class ClazzService implements IService<Clazz, Long>{
+public class ScheduleService implements IService<Schedule, Long>{
     @Autowired
-    private ClazzRepository repository;
-     @Autowired
-    private ScheduleRepository scheduleRepository;
-
+    private ScheduleRepository repository;
     @Override
-    public Clazz save(Clazz entity) {
+    public Schedule save(Schedule entity) {
         return repository.save(entity);
     }
 
     @Override
-    public Clazz findById(Long id) {
+    public Schedule findById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Clazz> findAll() {
+    public List<Schedule> findAll() {
         return repository.findAll();
     }
 
@@ -46,8 +43,7 @@ public class ClazzService implements IService<Clazz, Long>{
         return repository.existsById(id);
     }
 
-    public List<Schedule> findScheduleOfClazz(Long clazzId) {
-        return scheduleRepository.findAllScheduleOfCourseByCourseId(clazzId);
+    public List<Schedule> findScheduleOfStudent(Long id, LocalDate tuNgay, LocalDate denNgay) {
+        return repository.findScheduleOfStudent(id, tuNgay, denNgay);
     }
-
 }

@@ -1,33 +1,30 @@
 package iuh.dangkyhocphan.services;
 
-import iuh.dangkyhocphan.models.Clazz;
-import iuh.dangkyhocphan.models.Schedule;
-import iuh.dangkyhocphan.repositories.ClazzRepository;
-import iuh.dangkyhocphan.repositories.ScheduleRepository;
+import iuh.dangkyhocphan.models.Administrator;
+import iuh.dangkyhocphan.models.Student;
+import iuh.dangkyhocphan.respositories.AdministratorRepository;
+import iuh.dangkyhocphan.respositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ClazzService implements IService<Clazz, Long>{
+public class AdministratorService implements IService<Administrator, Long>{
     @Autowired
-    private ClazzRepository repository;
-     @Autowired
-    private ScheduleRepository scheduleRepository;
-
+    AdministratorRepository repository;
     @Override
-    public Clazz save(Clazz entity) {
+    public Administrator save(Administrator entity) {
         return repository.save(entity);
     }
 
     @Override
-    public Clazz findById(Long id) {
+    public Administrator findById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Clazz> findAll() {
+    public List<Administrator> findAll() {
         return repository.findAll();
     }
 
@@ -45,9 +42,4 @@ public class ClazzService implements IService<Clazz, Long>{
     public boolean existsById(Long id) {
         return repository.existsById(id);
     }
-
-    public List<Schedule> findScheduleOfClazz(Long clazzId) {
-        return scheduleRepository.findAllScheduleOfCourseByCourseId(clazzId);
-    }
-
 }
