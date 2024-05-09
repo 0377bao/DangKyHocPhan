@@ -93,6 +93,7 @@ public class Clazz implements Serializable {
     public void setCourse(Course course) {
         this.course = course;
     }
+
     public Administrator getAdministrator() {
         return administrator;
     }

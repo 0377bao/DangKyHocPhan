@@ -29,6 +29,10 @@ public class Schedule implements Serializable {
     @JoinColumn(name = "class_id")
     private Clazz clazz;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "class_id")
+    private Clazz clazz;
+
     @Override
     public String toString() {
         return "Schedule{" +
@@ -84,6 +88,14 @@ public class Schedule implements Serializable {
 
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
+    }
+
+    public Clazz getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Clazz clazz) {
+        this.clazz = clazz;
     }
 
     public Schedule() {

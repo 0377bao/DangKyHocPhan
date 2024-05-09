@@ -24,7 +24,7 @@ public class Course implements Serializable {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> chuyenNganh;
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "course_opening_id")
     private CourseOpening courseOpening;
 

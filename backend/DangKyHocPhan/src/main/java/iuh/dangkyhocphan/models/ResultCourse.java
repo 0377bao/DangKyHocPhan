@@ -14,9 +14,9 @@ public class ResultCourse implements Serializable {
     @Column(name = "resultCourse_id")
     private Long id;
     private double diemGiuaKi;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<Double> diemThuongKi = new ArrayList<>();
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<Double> diemThucHanh = new ArrayList<>();
     private double diemCuoiKi;
     private String ghiChu;

@@ -2,7 +2,7 @@ package iuh.dangkyhocphan.models;
 
 
 import jakarta.persistence.*;
-
+import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -24,8 +24,11 @@ public class Enrollment implements Serializable {
     @OneToOne
     private ResultCourse resultCourse;
 
+    @Id
     private LocalDate ngayBatDau;
+    @Id
     private LocalDate ngayKetThuc;
+    @Id
     private String hocKi;
 
     public Enrollment() {
@@ -94,6 +97,7 @@ public class Enrollment implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Enrollment that = (Enrollment) o;
         return Objects.equals(student, that.student) && Objects.equals(clazz, that.clazz);
+
     }
 
     @Override

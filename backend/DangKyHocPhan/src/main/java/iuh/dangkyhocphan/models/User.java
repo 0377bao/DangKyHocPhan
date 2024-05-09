@@ -16,6 +16,7 @@ public abstract class User implements Serializable {
     protected String hoTen;
     protected LocalDate ngaySinh;
     protected boolean gioiTinh;
+    @Column(unique = true, nullable = false)
     protected String cccd;
     protected String sdt;
     protected String email;

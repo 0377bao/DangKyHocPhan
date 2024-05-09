@@ -1,5 +1,6 @@
 package iuh.dangkyhocphan.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class Student extends User{
     private String lopHoc;
     private String nienKhoa;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "student")
     private transient List<Enrollment> dsDangKy = new ArrayList<>();
 
