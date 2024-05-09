@@ -7,6 +7,8 @@ import iuh.dangkyhocphan.models.Schedule;
 import iuh.dangkyhocphan.services.ClazzService;
 import iuh.dangkyhocphan.services.EnrollmentService;
 import java.util.Map;
+
+import iuh.dangkyhocphan.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ public class EnrollmentController {
     private EnrollmentService enrollmentService;
     @Autowired
     private ClazzService clazzService;
+    @Autowired
+    private StudentService studentService;
 
     // find list enrollment by student id
     @GetMapping("/{id}")
@@ -81,6 +85,45 @@ public class EnrollmentController {
     }
 
     // cancel enrollment by id
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseObject> deleteEnrollment(@RequestParam("studentId") Long studentId, @RequestParam("classId") Long classId) {
+        // check student and class were exist
+        boolean checkStudent = studentService.existsById(studentId);
+        boolean checkClazz = clazzService.existsById(classId);
+        if(!checkStudent){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ResponseObject("Failed", "Can't find student with id = " + studentId, "")
+            );
+        }
+        if(!checkClazz) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ResponseObject("Failed", "Can't find class with id = " + classId, "")
+            );
+        }
+        // check status class
+        Clazz currentClazz = clazzService.findById(classId);
+        if(currentClazz.getTrangThai().equalsIgnoreCase("Đã khóa")) {
+            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
+                    new ResponseObject("Failed", "Class was blocked so you can't delete enrollment", "")
+            );
+        }else {
+            boolean result = enrollmentService.deleteEnrollmentByStudentIdAndClazzId(studentId, classId);
+            if(result) {
+                try{
+                    currentClazz.setSiSoHienTai(currentClazz.getSiSoHienTai() - 1);
+                    clazzService.save(currentClazz);
+                }catch (Exception e){
+                    throw new RuntimeException("Can't update amount of student for class with id = " + classId);
+                }
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new ResponseObject("Success", "Delete enrollment successfully", "")
+                );
+             }
+        }
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(
+                new ResponseObject("Failed", "Can't delete enrollment with id = " + classId, "")
+        );
+    }
 
 
 

@@ -11,11 +11,11 @@ import java.time.LocalDate;
 
 public class EnrollmentId implements Serializable {
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "student_id")
     private Student student;
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "class_id")
     private Clazz clazz;
     @Id

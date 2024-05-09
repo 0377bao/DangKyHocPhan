@@ -28,7 +28,7 @@ public class EnrollmentService implements IService<Enrollment, Long>{
 
     @Override
     public void deleteById(Long id) {
-        repository.deleteEnrollmentByClazzId(id);
+
     }
 
     @Override
@@ -43,5 +43,15 @@ public class EnrollmentService implements IService<Enrollment, Long>{
 
     public List<Enrollment> findAllEnrollmentByStudentId(Long studentId) {
         return repository.findAllEnrollmentByStudentId(studentId);
+    }
+
+    public boolean deleteEnrollmentByStudentIdAndClazzId(Long studentId, Long clazzId) {
+       Enrollment foundEnrollment = repository.findEnrollmentByClazzId(studentId, clazzId);
+        try{
+            repository.delete(foundEnrollment);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }
