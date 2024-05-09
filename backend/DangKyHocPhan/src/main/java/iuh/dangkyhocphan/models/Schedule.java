@@ -11,24 +11,12 @@ public class Schedule implements Serializable {
     @Column(name = "schedule_id")
     private Long id;
 
-    public Clazz getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(Clazz clazz) {
-        this.clazz = clazz;
-    }
-
     @Enumerated(EnumType.STRING)
     private Day thu;
     private String loaiLich;
     private String phongHoc;
     private String tietHoc;
     private String ghiChu;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "class_id")
-    private Clazz clazz;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "class_id")
     private Clazz clazz;

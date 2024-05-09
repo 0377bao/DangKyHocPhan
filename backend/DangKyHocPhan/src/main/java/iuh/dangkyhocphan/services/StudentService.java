@@ -1,7 +1,7 @@
 package iuh.dangkyhocphan.services;
 
 import iuh.dangkyhocphan.models.Student;
-import iuh.dangkyhocphan.respositories.StudentRepository;
+import iuh.dangkyhocphan.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

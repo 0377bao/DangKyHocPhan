@@ -1,9 +1,8 @@
 package iuh.dangkyhocphan.services;
 
 import iuh.dangkyhocphan.models.Schedule;
-import iuh.dangkyhocphan.respositories.ScheduleRepository;
+import iuh.dangkyhocphan.repositories.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

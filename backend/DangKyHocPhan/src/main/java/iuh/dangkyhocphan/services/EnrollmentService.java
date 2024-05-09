@@ -1,7 +1,7 @@
 package iuh.dangkyhocphan.services;
 
 import iuh.dangkyhocphan.models.Enrollment;
-import iuh.dangkyhocphan.respositories.EnrollmentRepository;
+import iuh.dangkyhocphan.repositories.EnrollmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +44,7 @@ public class EnrollmentService implements IService<Enrollment, Long>{
 
     public List<Enrollment> findAllEnrollmentByStudentId(Long studentId) {
         return repository.findAllEnrollmentByStudentId(studentId);
+    }
 
     public List<Enrollment> findEnrollmentOfStudent(Long id) {
         return repository.findEnrollmentOfStudent(id);

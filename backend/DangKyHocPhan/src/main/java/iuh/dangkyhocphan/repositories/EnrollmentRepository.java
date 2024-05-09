@@ -18,4 +18,9 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
     @Modifying
     @Query("delete from Enrollment e where e.clazz.id = :clazzId")
     boolean deleteEnrollmentByClazzId(Long clazzId);
+
+    @Query("SELECT e FROM Enrollment e WHERE e.student.id = ?1")
+    List<Enrollment> findEnrollmentOfStudent(Long id);
+    @Query("SELECT e.hocKi FROM Enrollment e WHERE e.student.id = ?1 GROUP BY e.hocKi")
+    List<String> findSemesterOfStudent(Long id);
 }

@@ -2,8 +2,7 @@ package iuh.dangkyhocphan.services;
 
 import iuh.dangkyhocphan.models.Administrator;
 import iuh.dangkyhocphan.models.Student;
-import iuh.dangkyhocphan.respositories.AdministratorRepository;
-import iuh.dangkyhocphan.respositories.StudentRepository;
+import iuh.dangkyhocphan.repositories.AdministratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
