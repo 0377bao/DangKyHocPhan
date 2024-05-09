@@ -100,6 +100,65 @@ public class ResultCourse implements Serializable {
         this.diemTongKet = diemTongKet;
     }
 
+    public String convertPointToChart() {
+        if(this.getDiemTongKet() >= 0 && this.getDiemTongKet() < 4) return "F";
+        else if(this.getDiemTongKet() >= 4 && this.getDiemTongKet() < 5) return "D";
+        else if(this.getDiemTongKet() >= 5 && this.getDiemTongKet() < 5.5) return "D+";
+        else if(this.getDiemTongKet() >= 5.5 && this.getDiemTongKet() < 6.0) return "C";
+        else if(this.getDiemTongKet() >= 6.0 && this.getDiemTongKet() < 7) return "C+";
+        else if(this.getDiemTongKet() >= 7 && this.getDiemTongKet() < 8) return "B";
+        else if(this.getDiemTongKet() >= 8 && this.getDiemTongKet() < 8.5) return "B+";
+        else if(this.getDiemTongKet() >= 8.5 && this.getDiemTongKet() < 9) return "A";
+        else return "A+";
+
+    }
+
+    public Double convertToA4Point() {
+        switch (this.convertPointToChart()) {
+            case "F":
+                return 0.0;
+            case "D":
+                return 1.0;
+            case "D+":
+                return 1.5;
+            case "C":
+                return 2.0;
+            case "C+":
+                return 2.5;
+            case "B":
+                return 3.0;
+            case "B+":
+                return 3.5;
+            case "A":
+                return 3.8;
+            default:
+                return 4.0;
+        }
+    }
+
+    public String convertToRank() {
+        switch (this.convertPointToChart()) {
+            case "F":
+                return "Kém";
+            case "D":
+                return "Trung Bình Yếu";
+            case "D+":
+                return "Trung Bình Yếu";
+            case "C":
+                return "Trung Bình";
+            case "C+":
+                return "Trung Bình";
+            case "B":
+                return "Khá";
+            case "B+":
+                return "Khá";
+            case "A":
+                return "Giỏi";
+            default:
+                return "Xuất sắc";
+        }
+    }
+
     @Override
     public String toString() {
         return "ResultCourse{" +

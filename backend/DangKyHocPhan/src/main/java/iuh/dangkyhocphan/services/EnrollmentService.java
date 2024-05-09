@@ -40,4 +40,11 @@ public class EnrollmentService implements IService<Enrollment, Long>{
     public boolean existsById(Long id) {
         return repository.existsById(id);
     }
+
+    public List<Enrollment> findEnrollmentOfStudent(Long id) {
+        return repository.findEnrollmentOfStudent(id);
+    }
+    public List<String> findSemesterOfStudent(Long id) {
+        return repository.findSemesterOfStudent(id);
+    }
 }
