@@ -47,12 +47,12 @@ public class DangKyHocPhanApplication implements CommandLineRunner {
 //        teacher = teacherService.save(teacher);
 //        course = courseService.save(course);
 //        courseService.save(course1);
-        teacher = teacherService.findById(1L);
-        course = courseService.findById(1L);
-        a1 = administratorService.findById(2L);
+//        teacher = teacherService.findById(1L);
+//        course = courseService.findById(1L);
+//        a1 = administratorService.findById(2L);
         Clazz clazz = new Clazz("DHKTPM17C", teacher, 45, 45, "Đã khóa", course, a1);
 //        clazzService.save(clazz);
-        clazz = clazzService.findById(1L);
+//        clazz = clazzService.findById(1L);
 //        Schedule schedule = new Schedule(Day.MONDAY, "Lý thuyết", "X10.1", "10-12", "Tuần 1-15", clazz);
 //        Schedule schedule1 = new Schedule(Day.MONDAY, "Lý thuyết", "H8.02", "1-3", null, clazz);
         Schedule schedule2 = new Schedule(Day.TUESDAY, "Trực tuyến", "Trực tuyến (MS Teams)", "9-10", "Teams: 28zc14v", clazz);
@@ -61,8 +61,8 @@ public class DangKyHocPhanApplication implements CommandLineRunner {
 //       scheduleService.save(schedule1);
 //        scheduleService.save(schedule2);
 //        scheduleService.save(schedule3);
-        s1 = studentService.findById(1L);
-        clazz = clazzService.findById(2L);
+//        s1 = studentService.findById(1L);
+//        clazz = clazzService.findById(2L);
 //        System.out.println(clazz);
         Enrollment enrollment = new Enrollment(s1, clazz, null, LocalDate.of(2024, 3,1), LocalDate.now(), "Học kỳ 1 (2021-2023)");
 //        System.out.println(enrollment);
