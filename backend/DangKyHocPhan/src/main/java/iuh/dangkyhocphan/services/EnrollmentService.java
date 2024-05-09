@@ -43,7 +43,7 @@ public class EnrollmentService implements IService<Enrollment, Long>{
 
 
     public List<Enrollment> findAllEnrollmentByStudentId(Long studentId) {
-        return repository.findAllEnrollmentByStudentId(studentId);
+        return repository.findEnrollmentOfStudent(studentId);
     }
 
     public List<Enrollment> findEnrollmentOfStudent(Long id) {

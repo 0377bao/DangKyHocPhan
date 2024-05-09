@@ -10,14 +10,8 @@ import java.util.List;
 
 @Repository
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
-    @Query("select e from Enrollment e join Student s on e.student.id = s.id where s.id = :studentId")
-    List<Enrollment> findAllEnrollmentByStudentId(Long studentId);
     @Query("select e from Enrollment e join Clazz c on e.clazz.id = c.id where c.id = :clazzId")
     Enrollment findEnrollmentByClazzId(Long clazzId);
-
-    @Modifying
-    @Query("delete from Enrollment e where e.clazz.id = :clazzId")
-    boolean deleteEnrollmentByClazzId(Long clazzId);
 
     @Query("SELECT e FROM Enrollment e WHERE e.student.id = ?1")
     List<Enrollment> findEnrollmentOfStudent(Long id);
