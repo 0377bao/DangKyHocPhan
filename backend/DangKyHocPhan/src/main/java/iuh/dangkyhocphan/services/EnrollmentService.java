@@ -51,6 +51,7 @@ public class EnrollmentService implements IService<Enrollment, Long>{
 
     public List<Enrollment> findEnrollmentOfStudentBySemester(Long id, String hocKi) {
         return repository.findEnrollmentOfStudentBySemester(id, hocKi);
+    }
       
     public boolean deleteEnrollmentByStudentIdAndClazzId(Long studentId, Long clazzId) {
        Enrollment foundEnrollment = repository.findEnrollmentByStudentIdAndClazzId(studentId, clazzId);
