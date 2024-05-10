@@ -1,28 +1,28 @@
 package iuh.dangkyhocphan.services;
 
-import iuh.dangkyhocphan.models.Course;
-import iuh.dangkyhocphan.repositories.CourseRepository;
+import iuh.dangkyhocphan.models.ResultCourse;
+import iuh.dangkyhocphan.repositories.ResultCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CourseService implements IService<Course, Long>{
+public class ResultCourseService implements IService<ResultCourse, Long>{
     @Autowired
-    CourseRepository repository;
+    ResultCourseRepository repository;
     @Override
-    public Course save(Course entity) {
+    public ResultCourse save(ResultCourse entity) {
         return repository.save(entity);
     }
 
     @Override
-    public Course findById(Long id) {
+    public ResultCourse findById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Course> findAll() {
+    public List<ResultCourse> findAll() {
         return repository.findAll();
     }
 
@@ -41,7 +41,7 @@ public class CourseService implements IService<Course, Long>{
         return repository.existsById(id);
     }
 
-    public Course getCourseOfClazz(Long id) {
-        return repository.getCourseOfClazz(id);
+    public ResultCourse getResultCourseOfStudent(Long id, Long courseId) {
+        return repository.getResultCourseOfStudent(id, courseId);
     }
 }

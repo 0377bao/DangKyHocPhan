@@ -15,4 +15,9 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     @Query("SELECT s FROM Enrollment e JOIN e.clazz c JOIN Schedule s on e.clazz.id = s.clazz.id WHERE e.student.id = ?1 AND e.ngayBatDau >= ?2 AND e.ngayKetThuc <= ?3" +
             " order by s.thu, s.tietHoc")
     List<Schedule> findScheduleOfStudent(Long id, LocalDate tuNgay, LocalDate denNgay);
+
+    @Query("SELECT s FROM Enrollment e JOIN Schedule s on e.clazz = s.clazz WHERE e.student.id = ?1 and e.hocKi = ?2")
+    List<Schedule> findScheduleOfStudentBySemester(Long id, String hocKi);
+    @Query("SELECT s FROM Schedule s WHERE s.clazz.id = ?1")
+    List<Schedule> findScheduleByClazz(Long clazzId);
 }
