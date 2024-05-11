@@ -50,4 +50,8 @@ public class ClazzService implements IService<Clazz, Long>{
         return scheduleRepository.findAllScheduleOfCourseByCourseId(clazzId);
     }
 
+    public Clazz findClazzByCourseId(Long courseId) {
+        return repository.findClazzByCourseId(courseId);
+    }
+
 }

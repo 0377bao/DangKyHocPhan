@@ -1,5 +1,6 @@
 package iuh.dangkyhocphan.services;
 
+import iuh.dangkyhocphan.models.Day;
 import iuh.dangkyhocphan.models.Schedule;
 import iuh.dangkyhocphan.repositories.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,9 @@ public class ScheduleService implements IService<Schedule, Long>{
 
     public List<Schedule> findScheduleOfStudent(Long id, LocalDate tuNgay, LocalDate denNgay) {
         return repository.findScheduleOfStudent(id, tuNgay, denNgay);
+    }
+
+    public boolean checkScheduleDuplicateForActionCreateClazz(String hocky, Day thu, String tietHoc) {
+        return repository.checkScheduleDuplicateForActionCreateClazz(hocky, thu, tietHoc) != null;
     }
 }

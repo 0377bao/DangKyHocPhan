@@ -40,4 +40,8 @@ public class CourseService implements IService<Course, Long>{
     public boolean existsById(Long id) {
         return repository.existsById(id);
     }
+
+    public List<Course> findAllCourseByHocKyAndKhoa(String hocKy, String khoa) {
+        return repository.findAllCourseByHockyAndDepartment(hocKy, khoa);
+    }
 }

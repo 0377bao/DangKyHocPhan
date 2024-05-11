@@ -1,5 +1,6 @@
 package iuh.dangkyhocphan.repositories;
 
+import iuh.dangkyhocphan.models.Day;
 import iuh.dangkyhocphan.models.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +16,8 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     @Query("SELECT s FROM Enrollment e JOIN e.clazz c JOIN Schedule s on e.clazz.id = s.clazz.id WHERE e.student.id = ?1 AND e.ngayBatDau >= ?2 AND e.ngayKetThuc <= ?3" +
             " order by s.thu, s.tietHoc")
     List<Schedule> findScheduleOfStudent(Long id, LocalDate tuNgay, LocalDate denNgay);
+
+    @Query("select e from Schedule e join Clazz c on e.clazz.id = c.id join Course co on c.course.id = co.id where co.courseOpening.hocky = :hocky and e.thu = :thu and e.tietHoc = :tietHoc")
+    Schedule checkScheduleDuplicateForActionCreateClazz(String hocky, Day thu, String tietHoc);
+
 }

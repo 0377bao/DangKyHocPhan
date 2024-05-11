@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="api/dkhp/enrollment")
+@RequestMapping(path="/api/dkhp/enrollment")
 public class EnrollmentController {
     @Autowired
     private EnrollmentService enrollmentService;
