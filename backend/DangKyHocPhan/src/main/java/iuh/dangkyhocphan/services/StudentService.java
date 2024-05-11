@@ -42,4 +42,8 @@ public class StudentService implements IService<Student, Long>{
     public boolean existsById(Long id) {
         return repository.existsById(id);
     }
+
+    public Student findStudentByCCCD(String cccd) {
+        return repository.findStudentByCCCD(cccd);
+    }
 }
