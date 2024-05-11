@@ -43,11 +43,19 @@ public class ScheduleService implements IService<Schedule, Long>{
         return repository.existsById(id);
     }
 
+    public List<Schedule> findScheduleByClass(Long clazzId) {
+        return repository.findScheduleByClazz(clazzId);
+    }
+
     public List<Schedule> findScheduleOfStudent(Long id, LocalDate tuNgay, LocalDate denNgay) {
         return repository.findScheduleOfStudent(id, tuNgay, denNgay);
     }
 
     public boolean checkScheduleDuplicateForActionCreateClazz(String hocky, Day thu, String tietHoc) {
         return repository.checkScheduleDuplicateForActionCreateClazz(hocky, thu, tietHoc) != null;
+
+    public List<Schedule> findScheduleOfStudentBySemester(Long id, String hocKi) {
+        return repository.findScheduleOfStudentBySemester(id, hocKi);
+
     }
 }
