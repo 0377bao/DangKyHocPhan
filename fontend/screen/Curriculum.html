@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="../css/Curriculum.css">
+</head>
+<body>
+    <div class="container">
+        <!-- header -->
+        <div>
+            <img src="../img/banner.png" alt="banner">
+        </div>
+
+        <!-- menu -->
+        <div class="menu">
+           <!-- Thông tin cá nhân -->
+
+           <div class="menu-personal">
+                <p>Xin chào!</p>
+                <p><h2>Lê Hữu Bằng</h2></p>
+                <p>Giới tính: </p>
+                <p>MSSV:</p>
+                <p>Trạng thái:</p>
+
+                <button type="submit" onclick="login()">Đăng xuất</button>
+           </div>
+
+           <div class="img-avatar">
+                <img src="../img/user.png" alt="user">
+           </div>
+           
+           
+
+            <!-- Menu đăng ký học phần -->
+            <div class="menu-item">
+                <a href="Home.html">THÔNG TIN SINH VIÊN</a> <br>
+                <a href="Register.html">ĐĂNG KÝ HỌC PHẦN</a> <br>
+                <a href="Curriculum.html">CHƯƠNG TRÌNH KHUNG</a>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="content">
+            <h2>TRA CỨU CHƯƠNG TRÌNH KHUNG</h2> <br>
+            <h3>SINH VIÊN: LÊ HỮU BẰNG</h3>
+            <div class="content-both">
+                <div class="content-left">
+                    <p>ĐẠI HỌC CHÍNH QUY</p>
+                    <p>KHÓA 2020 - 2024</b></p>
+                    <p>CƠ SỞ 1 (THÀNH PHỐ HỒ CHÍ MINH)></p>
+                 </div>
+     
+                 <div class="content-right">
+                     <p>NGÀNH KỸ THUẬT PHẦN MỀM</p>
+                     <p>CHUYÊN NGÀNH KỸ THUẬT PHẦN MỀM - 7480103</p>
+                 </div>
+            </div> 
+        </div>
+
+         <!-- footer -->
+         <div class="footer">
+            <div class="left-footer">
+                <b>TRƯỜNG ĐẠI HỌC CÔNG NGHIỆP THÀNH PHỐ HỒ CHÍ MINH</b> <br>
+                <p>Địa chỉ: 12 Nguyễn Văn Bảo, phường 4, quận Gò Vấp, TP.Hồ Chí Minh </p> 
+                <p>Điện thoại: 0283 8940 390 </p>
+                <p>Fax: 0283 9940 954 </p> 
+                <p>Email: dhcn@iuh.edu.vn</p> 
+            </div>
+    
+            <div class="right-footer">
+                <p>Thống kê truy cập</p> 
+                <p>Lượt truy cập: 2038569</p> 
+                <p>Đang online: 345</p>
+            </div>
+        </div>
+
+        <div class="footer-butoom">
+            <p>Bảng quyền 2018 - Trường Đại học Công nghiệp TP. Hồ Chí Minh</p>
+        </div>
+
+    </div>
+    <script>
+        function login() {
+            // Thực hiện xử lý đăng nhập ở đây nếu cần
+    
+            // Chuyển hướng sang trang Home.html
+            window.location.href = "LoginRegister.html";
+        }
+    </script>
+</body>
+</html>
