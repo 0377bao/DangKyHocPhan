@@ -84,7 +84,7 @@ body{
 
 
     table{
-        width: 150%;
+        width: 165%;
         max-width: 177%;
         margin-bottom: 20px;
         height: 150px;
@@ -104,6 +104,7 @@ body{
     tbody{
         background-color: #fff;
         color: #3d3d3d;
+        
     }
     tr{
         display: table-row;

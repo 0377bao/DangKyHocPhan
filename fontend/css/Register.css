@@ -165,7 +165,17 @@ body {
         display: table-row;
         vertical-align: inherit;
         unicode-bidi: isolate;
-        border-color: inherit;
+        border-color: #0000FF;
+    }
+    tbody{
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: #0000FF;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: #CCCCCC;
+    
     }
 }
 
@@ -207,6 +217,7 @@ body {
     justify-content: center;
     align-items: center;
     margin-left: 450px;
+
     
 }
 
