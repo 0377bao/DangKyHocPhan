@@ -126,6 +126,52 @@ body{
     font-size: 10px;
 }
 
+.content-subject{
+    h3{
+        text-align: center;
+        color: #eb7b21;
+        font-size: 19px;
+        margin-top: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: relative;
+        margin-bottom: 20px;
+    }
+}
+
+.table-register{
+    max-height: 550px;
+
+    table{
+        width: 98%;
+        max-width: 100%;
+        margin-bottom: 20px;
+        height: 200px;
+        margin-left: 10px;
+    }
+    thead{
+        background-color: #0c6fbe;
+        color: #fff;
+        height: 50px;
+    }
+    tr{
+        display: table-row;
+        vertical-align: inherit;
+        unicode-bidi: isolate;
+        border-color: #0000FF;
+    }
+    tbody{
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: #0000FF;
+        justify-content: center;
+        align-items: center;
+        font-size: 17px;
+        background-color: #EEEEEE;
+    
+    }
+}
+
 /* Chỉnh sửa CSS cho màn hình nhỏ hơn 600px: */
 
 @media only screen and (max-width: 600px) {
