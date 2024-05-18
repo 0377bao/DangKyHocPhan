@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" type="text/css" href="../css/Register.css">
+    <script src="../js/Home.js"></script>
+    <script src="../js/Register.js"></script>
 </head>
 <body>
     <div class="container">
@@ -37,7 +39,7 @@
             <div class="menu-item">
                 <a href="Home.html">THÔNG TIN SINH VIÊN</a> <br>
                 <a href="Register.html">ĐĂNG KÝ HỌC PHẦN</a> <br>
-                <a href="Programme.html">CHƯƠNG TRÌNH KHUNG</a>
+                <a href="Curriculum.html">CHƯƠNG TRÌNH KHUNG</a>
             </div>
         </div>
 
@@ -50,15 +52,15 @@
                     <b>Đợt đăng ký</b>
 
                     <!-- Chọn học kỳ: -->
-                    <Select>
-                        <option value="1">HK3 (2023- 2024)</option>
-                        <option value="2">HK1 (2024- 2025)</option>
-                        <option value="3">HK2 (2024- 2025)</option>
+                    <Select id="semesterSelect" onchange="fetchCourseData()">
+                        <option value="1">HK1 (2021- 2022)</option>
+                        <option value="2">HK2 (2021- 2022)</option>
+                        <option value="3">HK3 (2021- 2022)</option>
                     </Select>
 
 
                     <!-- Radio -->
-                    <input type="radio" id="hocMoi" name="gender" value="hocMoi">
+                    <input type="radio" id="hocMoi" name="gender" value="hocMoi" checked>
                     <label for="hocMoi">HỌC MỚI</label>
             
                     <input type="radio" id="hocLai" name="gender" value="hocLai">
@@ -92,9 +94,9 @@
 
                 </div>
 
-                <div class="content-subject">
+                <div class="content-subject4">
                     <h3>LỚP HỌC PHẦN CHỜ ĐĂNG KÝ</h3>
-                    <form action="" class="table-register">
+                    <form action="" class="table-register4">
                         <table>
                             <thead>
                                 <tr>
@@ -115,7 +117,7 @@
                 </div>
 
 
-                <div class="content-subject">
+                <div class="content-subject1">
                     <h3>CHI TIẾT LỚP HỌC PHẦN</h3>
                     <div class="content-honestly">
                         <label>Nhóm thực hành</label>
@@ -124,7 +126,7 @@
                             <option value="2">No results found</option>
                         </Select>
                     </div>
-                    <form action="" class="table-register">
+                    <form action="" class="table-register1">
                         <table>
                             <thead>
                                 <tr>
@@ -148,9 +150,9 @@
                 </div>
 
 
-                <div class="content-subject">
+                <div class="content-subject2">
                     <h3>LỚP HỌC PHẦN ĐÃ ĐĂNG KÝ TRONG KÌ HỌC NÀY</h3>
-                    <form action="" class="table-register">
+                    <form action="" class="table-register2">
                         <table>
                             <thead>
                                 <tr>
@@ -198,6 +200,7 @@
 
         <div class="footer-butoom">
             <p>Bảng quyền 2018 - Trường Đại học Công nghiệp TP. Hồ Chí Minh</p>
+           
         </div>
 
     </div>
@@ -209,6 +212,71 @@
             // Chuyển hướng sang trang Home.html
             window.location.href = "LoginRegister.html";
         }
+            document.addEventListener("DOMContentLoaded", function() {
+                fetchCourseData(); // Initial fetch for course data
+                fetchEnrollmentData(); // You might call this here if needed initially
+            });
+            
+            // Fetch initial course data
+            function fetchCourseData() {
+                const semesterId = document.getElementById('semesterSelect').value;
+                fetch(`http://localhost:8080/api/dkhp/CourseOpening/${semesterId}`)
+                    .then(response => response.json())
+                    .then(data => updateCoursesTable(data.data.dsKhoaHoc))
+                    .catch(error => console.error('Error fetching course data:', error));
+            }
+            
+            // Update the course table with fetched data
+            function updateCoursesTable(courses) {
+                const tbody = document.querySelector('.table-register tbody');
+                tbody.innerHTML = '';
+                courses.forEach((course, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><input type="radio" name="courseSelection" onclick="fetchCourseDetails(${course.id})"></td>
+                        <td>${index + 1}</td>
+                        <td>${course.id}</td>
+                        <td>${course.id}</td>
+                        <td>${course.tenMonHoc}</td>
+                        <td>${course.soTinChi}</td>
+                        <td><img src="../img/check.png" alt=""></td>
+                        <td>${course.monTienQuyet.join(', ') || 'None'}</td>
+                        <td></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+            
+            // Fetch specific course details
+            function fetchCourseDetails(courseId) {
+                fetch(`http://localhost:8080/api/admin/clazz/1`) //${courseId}
+                    .then(response => response.json())
+                    .then(data => updateCourseDetailsTable(data.data))
+                    .catch(error => console.error('Error fetching course details:', error));
+            }
+            
+            // Update the course details table with fetched details
+            function updateCourseDetailsTable(details) {
+                const tbody = document.querySelector('.table-register4 tbody');
+                tbody.innerHTML = ''; // Clear previous entries
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="radio" name="courseSelection" "></td>
+                    <td>1</td>
+                    <td>${details.maLop}</td>
+                    <td>Giáo dục Quốc phòng và An ninh 1 </td>  
+                    <td>DHTH16C</td>
+                    <td>${details.siSoToiDa}</td>
+                    <td>40</td>
+                    <td>Chấp nhận mở lớp</td>
+                `;
+                tbody.appendChild(row);
+                 //${details.tenLopHocPhan}
+                 //${details.tenLopHocPhan}
+                 //${details.siSoHienTai}
+                 //${details.trangThaiLop}
+            }
+            
     </script>
 </body>
 </html>

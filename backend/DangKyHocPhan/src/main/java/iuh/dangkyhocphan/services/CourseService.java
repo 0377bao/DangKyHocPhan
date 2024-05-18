@@ -41,7 +41,12 @@ public class CourseService implements IService<Course, Long>{
         return repository.existsById(id);
     }
 
+    public List<Course> findAllCourseByHocKyAndKhoa(String hocKy, String khoa) {
+        return repository.findAllCourseByHockyAndDepartment(hocKy, khoa);
+    }
+
     public Course getCourseOfClazz(Long id) {
         return repository.getCourseOfClazz(id);
+
     }
 }
