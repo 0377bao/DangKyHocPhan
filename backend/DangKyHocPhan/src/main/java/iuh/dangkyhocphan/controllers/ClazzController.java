@@ -277,6 +277,7 @@ public class ClazzController {
             result.put("maMonHoc", clazz.getCourse().getId());
             result.put("tenMonHoc", clazz.getCourse().getTenMonHoc());
             result.put("tenLop", clazz.getTenLop());
+            result.put("siSoToiDa", clazz.getSiSoToiDa());
             result.put("siSoHienTai", clazz.getSiSoHienTai());
             result.put("trangThai", clazz.getTrangThai());
             dsClazz.add(result);
