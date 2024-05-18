@@ -137,6 +137,11 @@ public class EnrollmentController {
                     new ResponseObject("Failed", "Create enrollment fail because class full slot ", "")
             );
         }
+        if(enrollmentService.totalNumberOfCreditsInTheSemester(enrollment.getStudent_id(), enrollment.getHocKi()) + cl.getCourse().getSoTinChi() > 30) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
+                    new ResponseObject("Failed", "Create enrollment fail because the number of credits exceeds the limit 30", "")
+            );
+        }
         Enrollment add = new Enrollment(st, cl, null, enrollment.getNgayBatDau(), enrollment.getNgayKetThuc(), enrollment.getHocKi());
         Enrollment isCreated = enrollmentService.save(add);
         if(isCreated != null) {
