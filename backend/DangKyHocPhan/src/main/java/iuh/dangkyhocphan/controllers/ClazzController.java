@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -259,5 +260,29 @@ public class ClazzController {
                 new ResponseObject("Success", "Update class successfully", foundedClass)
         );
 
+    }
+
+    @GetMapping("/clazzPlan")
+    public ResponseEntity<ResponseObject> getAllClazzPlanOfCourse(@RequestParam("courseId") Long courseId, @RequestParam("status") String status){
+        List<Clazz> clazzList = clazzService.findClazzByCourseIdAndStatus(courseId, status);
+        List<Map> dsClazz = new ArrayList<>();
+        if(clazzList.size() == 0){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ResponseObject("Failed", "Can't find class plan belong to course id = " + courseId, "")
+            );
+        }
+        clazzList.forEach(clazz -> {
+            Map<String, Object> result = new HashMap<>();
+            result.put("maLop", clazz.getId());
+            result.put("maMonHoc", clazz.getCourse().getId());
+            result.put("tenMonHoc", clazz.getCourse().getTenMonHoc());
+            result.put("tenLop", clazz.getTenLop());
+            result.put("siSoHienTai", clazz.getSiSoHienTai());
+            result.put("trangThai", clazz.getTrangThai());
+            dsClazz.add(result);
+        });
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("Success", "Query class plan successfully", dsClazz)
+        );
     }
 }
