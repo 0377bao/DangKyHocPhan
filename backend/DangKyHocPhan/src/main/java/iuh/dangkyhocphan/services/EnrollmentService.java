@@ -62,4 +62,13 @@ public class EnrollmentService implements IService<Enrollment, Long>{
             return false;
         }
     }
+
+    public int totalNumberOfCreditsInTheSemester(Long id, String hocKi) {
+        try {
+            int sotinchi = repository.totalNumberOfCreditsInTheSemester(id, hocKi);
+            return sotinchi;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 }
