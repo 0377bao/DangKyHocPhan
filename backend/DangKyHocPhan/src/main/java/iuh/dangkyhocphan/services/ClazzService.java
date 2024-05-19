@@ -54,4 +54,8 @@ public class ClazzService implements IService<Clazz, Long>{
         return repository.findClazzByCourseId(courseId);
     }
 
+    public List<Clazz> findClazzByCourseIdAndStatus(Long courseId, String status) {
+        return repository.findClazzByCourseIdAndStatus(courseId, status);
+    }
+
 }
