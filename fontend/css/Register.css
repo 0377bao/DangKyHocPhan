@@ -267,6 +267,38 @@ body {
     
     }
 }
+.table-register3{
+    max-height: 350px;
+
+    table{
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+        height: 200px;
+        font-size: 15px;
+    }
+    thead{
+        background-color: #0c6fbe;
+        color: #fff;
+        height: 50px;
+    }
+    tr{
+        display: table-row;
+        vertical-align: inherit;
+        unicode-bidi: isolate;
+        border-color: #0000FF;
+    }
+    tbody{
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: #0000FF;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: #CCCCCC;
+    
+    }
+}
 .content-subject4{
     h3{
         text-align: center;
