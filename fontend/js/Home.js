@@ -1,6 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        alert('User not logged in');
+        window.location.href = "Home.html";
+        return;
+    }
+
     function fetchStudentDetails() {
-        fetch('http://localhost:8080/api/dkhp/Student/getStudentDetail/1')
+        fetch(`http://localhost:8080/api/dkhp/Student/getStudentDetail/${userId}`)
             .then(response => response.json())
             .then(data => {
                 updateStudentDetails(data);
