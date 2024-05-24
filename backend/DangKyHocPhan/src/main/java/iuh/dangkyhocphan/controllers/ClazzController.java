@@ -197,18 +197,19 @@ public class ClazzController {
             );
         }
         Student studentDefault = studentService.findStudentByCCCD("0");
-
         Enrollment enrollment = new Enrollment(studentDefault, foundClazz, null,clazz.getNgayBatDau(),clazz.getNgayKetThuc(), courseOpening.getHocky());
         enrollmentService.save(enrollment);
 
         if(enrollment != null){
             foundClazz.setTenLop(clazz.getTenLop());
             foundClazz.setCourse(course);
+            course.setCourseOpening(courseOpening);
             foundClazz.setGiangVien(teacher);
             foundClazz.setAdministrator(administrator);
             foundClazz.setSiSoHienTai(clazz.getSiSoHienTai());
             foundClazz.setSiSoToiDa(clazz.getSiSoToiDa());
             foundClazz.setTrangThai(clazz.getTrangThai());
+            courseService.save(course);
             clazzService.save(foundClazz);
             clazz.getLichHocLyThuyet().forEach(scheduleLT -> {
                 Schedule schedule = new Schedule();
