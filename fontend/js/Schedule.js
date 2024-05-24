@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function formatScheduleData(scheduleItem) {
-        return `${scheduleItem.tenMonHoc} (${scheduleItem.loaiLich})<br>${scheduleItem.tenGiangVien}<br>Phòng: ${scheduleItem.phongHoc}`;
+        return `<span>${scheduleItem.tenMonHoc}</span> (${scheduleItem.loaiLich})<br>${scheduleItem.tenGiangVien}<br>Phòng: ${scheduleItem.phongHoc}`;
     }
 
     fetchSchedule();
