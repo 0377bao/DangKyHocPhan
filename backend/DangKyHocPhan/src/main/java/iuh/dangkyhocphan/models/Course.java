@@ -16,6 +16,8 @@ public class Course implements Serializable {
     @Column(unique = true, nullable = false, length = 300)
     private String tenMonHoc;
     private int soTinChi;
+    @Column(name = "hoc_ky", nullable = false)
+    private String hocKy;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Course> monTienQuyet;
     private int hocPhi;
@@ -32,9 +34,10 @@ public class Course implements Serializable {
     public Course() {
     }
 
-    public Course(String tenMonHoc, int soTinChi, List<Course> monTienQuyet, int hocPhi, List<String> khoa, List<String> chuyenNganh, CourseOpening courseOpening) {
+    public Course(String tenMonHoc, int soTinChi, String hocKy, List<Course> monTienQuyet, int hocPhi, List<String> khoa, List<String> chuyenNganh, CourseOpening courseOpening) {
         this.tenMonHoc = tenMonHoc;
         this.soTinChi = soTinChi;
+        this.hocKy = hocKy;
         this.monTienQuyet = monTienQuyet;
         this.hocPhi = hocPhi;
         this.khoa = khoa;
@@ -56,6 +59,7 @@ public class Course implements Serializable {
                 "id=" + id +
                 ", tenMonHoc='" + tenMonHoc + '\'' +
                 ", soTinChi=" + soTinChi +
+                ", hocKy='" + hocKy + '\'' +
                 ", monTienQuyet=" + monTienQuyet +
                 ", hocPhi=" + hocPhi +
                 ", khoa=" + khoa +
@@ -113,5 +117,17 @@ public class Course implements Serializable {
 
     public void setCourseOpening(CourseOpening courseOpening) {
         this.courseOpening = courseOpening;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getHocKy() {
+        return hocKy;
+    }
+
+    public void setHocKy(String hocKy) {
+        this.hocKy = hocKy;
     }
 }
