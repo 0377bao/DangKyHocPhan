@@ -6,6 +6,7 @@
     <title>Schedule</title>
     <link rel="stylesheet" href="../css/Schedule.css">
     <script src="../js/Schedule.js"></script>
+    <script src="../js/HomePage.js"></script>
 </head>
 <body>
     <div class="container">
@@ -22,34 +23,33 @@
                 <label for="">Tin tức</label>
 
                 <img src="../img/user.png" alt="user">
-                <label for="">Lê Hữu Bằng</label>
+                <label  id="studentName"  for="">Lê Hữu Bằng</label>
             </div>
         </div>
 
         <!-- content -->
         <div class="content">
-
             <div class="content-tde">
                 <h2>Lịch học, lịch học theo tuần</h2>
             </div>
 
             <div class="actions">
                 <!-- Radio -->
-                <input type="radio" id="tc" name="gender" value="tc">
+                <input type="radio" id="tc" name="scheduleType" value="tc">
                 <label for="tc">Tất cả</label>
         
-                <input type="radio" id="lh" name="gender" value="lh">
+                <input type="radio" id="lh" name="scheduleType" value="lh">
                 <label for="lh">Lịch học</label>
         
-                <input type="radio" id="lt" name="gender" value="lt">
+                <input type="radio" id="lt" name="scheduleType" value="lt">
                 <label for="lt">Lịch thi</label>
 
                 <input type="date" id="birthday" name="birthday">
 
                 <button type="button">Hiện tại</button>
                 <button type="button">In lịch</button>
-                <button type="button">Trở về</button>
-                <button type="button">Tiếp</button>   
+                <button type="button" id="previousWeek">Trở về</button>
+                <button type="button" id="nextWeek">Tiếp</button>
             </div>
             <hr>
             <div class="content-subject">
@@ -58,13 +58,13 @@
                         <thead>
                             <tr>
                                 <th>Ca học</th>
-                                <th>Thứ 2 <br>01/05/2024</th>
-                                <th>Thứ 3 <br>02/05/2024</th>
-                                <th>Thứ 4 <br>03/05/2024</th>
-                                <th>Thứ 5 <br>04/05/2024</th>
-                                <th>Thứ 6 <br>06/05/2024</th>
-                                <th>Thứ 7 <br>07/05/2024</th>
-                                <th>Chủ nhật <br>08/05/2024</th>
+                                <th id="mon">Thứ 2</th>
+                                <th id="tue">Thứ 3</th>
+                                <th id="wed">Thứ 4</th>
+                                <th id="thu">Thứ 5</th>
+                                <th id="fri">Thứ 6</th>
+                                <th id="sat">Thứ 7</th>
+                                <th id="sun">Chủ nhật</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,5 +98,109 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let currentStartDate = new Date('2021-08-18');
+            let currentEndDate = new Date('2021-08-24');
+
+            function fetchSchedule(startDate, endDate) {
+                const formattedStartDate = formatDate(startDate);
+                const formattedEndDate = formatDate(endDate);
+                console.log(`Fetching schedule from ${formattedStartDate} to ${formattedEndDate}`);
+
+                fetch(`http://localhost:8080/api/dkhp/Schedule/getScheduleOfStudent?id=1&tuNgay=${formattedStartDate}&denNgay=${formattedEndDate}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Data fetched:', data);
+                        if (data.status === 'success' && Array.isArray(data.data)) {
+                            updateScheduleTable(data.data);
+                        } else {
+                            console.error('Expected array in data.data, received:', data);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+
+            function updateScheduleTable(scheduleData) {
+                const tbody = document.querySelector('.table-subject tbody');
+                tbody.innerHTML = ''; // Clear existing table rows
+
+                const daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+                const timeBlocks = { 'Sáng': [], 'Trưa': [], 'Chiều': [] };
+
+                scheduleData.forEach(item => {
+                    const block = getTimeBlock(parseInt(item.tietHoc.split('-')[0]));
+                    if (block) {
+                        timeBlocks[block].push(item);
+                    }
+                });
+
+                Object.entries(timeBlocks).forEach(([block, items]) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${block}</td>`;
+                    daysOfWeek.forEach(day => {
+                        row.innerHTML += `<td>${items.filter(item => item.thu === day).map(item => formatScheduleData(item)).join('<br>')}</td>`;
+                    });
+                    tbody.appendChild(row);
+                });
+
+                updateTableHeaders();
+            }
+
+            function formatScheduleData(scheduleItem) {
+                return `Lớp: ${scheduleItem.tenLop} (${scheduleItem.maLopHocPhan})<br>
+                        Môn học: ${scheduleItem.tenMonHoc} (${scheduleItem.loaiLich})<br>
+                        Giảng viên: ${scheduleItem.tenGiangVien}<br>
+                        Phòng: ${scheduleItem.phongHoc}<br>
+                        Tiết: ${scheduleItem.tietHoc}`;
+            }
+
+            function getTimeBlock(periods) {
+                if ((periods >= 1 && periods <= 3) || (periods >= 4 && periods <= 6)) {
+                    return "Sáng"; // Morning: periods 1-6
+                } else if (periods >= 7 && periods <= 9) {
+                    return "Trưa"; // Noon: periods 7-9
+                } else {
+                    return "Chiều"; // Afternoon: periods 10 onwards
+                }
+            }
+
+            function formatDate(date) {
+                return date.toISOString().split('T')[0];
+            }
+
+            function updateTableHeaders() {
+                const dayNames = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+                const startDate = new Date(currentStartDate);
+                dayNames.forEach((dayName, index) => {
+                    const date = new Date(startDate);
+                    date.setDate(startDate.getDate() + index);
+                    document.getElementById(dayName).innerHTML = `${date.toLocaleDateString('vi-VN')}<br>Thứ ${index + 2}`;
+                });
+            }
+
+            function updateSchedule() {
+                fetchSchedule(currentStartDate, currentEndDate);
+                updateTableHeaders();
+            }
+
+            document.getElementById('previousWeek').addEventListener('click', () => {
+                currentStartDate.setDate(currentStartDate.getDate() - 7);
+                currentEndDate.setDate(currentEndDate.getDate() - 7);
+                console.log('Previous week:', currentStartDate, currentEndDate);
+                updateSchedule();
+            });
+
+            document.getElementById('nextWeek').addEventListener('click', () => {
+                currentStartDate.setDate(currentStartDate.getDate() + 7);
+                currentEndDate.setDate(currentEndDate.getDate() + 7);
+                console.log('Next week:', currentStartDate, currentEndDate);
+                updateSchedule();
+            });
+
+            // Initial fetch
+            updateSchedule();
+        });
+    </script>
 </body>
 </html>

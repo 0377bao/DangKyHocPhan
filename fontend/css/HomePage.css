@@ -85,20 +85,20 @@ body{
 .content-between{
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
     line-height: 2em;
     background-color: #fff;
     font-size: 15px;
-    margin-left: -200px;
+    margin-left: -100px;
 }
 .content-right{
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
     line-height: 2em;
     background-color: #fff;
     font-size: 15px;
-    margin-left: -200px;
+    margin-left: -100px;
 }
 .menu{
     display: flex;
