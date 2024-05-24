@@ -10,8 +10,8 @@ function getTimeBlock(periods) {
 
 document.addEventListener("DOMContentLoaded", function() {
     function fetchSchedule() {
-        const startDate = '2024-03-01';
-        const endDate = '2024-05-07';
+        const startDate = '2021-03-01';
+        const endDate = '2022-05-07';
         fetch(`http://localhost:8080/api/dkhp/Schedule/getScheduleOfStudent?id=1&tuNgay=${startDate}&denNgay=${endDate}`)
             .then(response => response.json())
             .then(data => {
@@ -49,8 +49,34 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function formatScheduleData(scheduleItem) {
-        return `${scheduleItem.tenMonHoc} (${scheduleItem.loaiLich})<br>${scheduleItem.tenGiangVien}<br>Phòng: ${scheduleItem.phongHoc}`;
+        return `<span>${scheduleItem.tenMonHoc}</span> (${scheduleItem.loaiLich})<br>${scheduleItem.tenGiangVien}<br>Phòng: ${scheduleItem.phongHoc}`;
     }
 
     fetchSchedule();
+});
+
+//Hiển thị username
+document.addEventListener("DOMContentLoaded", function() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        alert('User not logged in');
+        window.location.href = "LoginHomePage.html";
+        return;
+    }
+
+
+    function fetchStudentDetails() {
+        fetch(`http://localhost:8080/api/dkhp/Student/getStudentDetail/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                updateStudentDetails(data);
+            })
+            .catch(error => console.error('Error fetching student details:', error));
+    }
+
+    function updateStudentDetails(student) {
+        document.getElementById('studentName').textContent = student.hoTen;
+    }
+
+    fetchStudentDetails();
 });

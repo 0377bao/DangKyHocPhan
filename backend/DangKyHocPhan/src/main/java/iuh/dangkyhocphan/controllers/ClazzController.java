@@ -263,7 +263,7 @@ public class ClazzController {
 
     }
 
-    @GetMapping("/clazzPlan")
+        @GetMapping("/clazzPlan")
     public ResponseEntity<ResponseObject> getAllClazzPlanOfCourse(@RequestParam("courseId") Long courseId, @RequestParam("status") String status){
         List<Clazz> clazzList = clazzService.findClazzByCourseIdAndStatus(courseId, status);
         List<Map> dsClazz = new ArrayList<>();

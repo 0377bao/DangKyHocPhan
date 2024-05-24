@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login Student</title>
     <link rel="stylesheet" href="../css/Login.css">
     <script src="../js/LoginRegister.js"></script>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .error-dot {
+            color: red;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,21 +28,23 @@
         </div>
 
         <!-- form login -->
-<div class="form-login">
-    <form id="loginForm" method="POST">
-        <div>
-            <label for="masv">Mã sinh viên</label>
-            <input type="text" id="masv" name="masv" placeholder="Nhập mã sinh viên">
+        <div class="form-login">
+            <form id="loginForm" method="POST">
+                <div>
+                    <label for="masv">Mã sinh viên</label>
+                    <input type="text" id="masv" name="masv" placeholder="Nhập mã sinh viên">
+                    <div id="masvError" class="error"></div>
+                </div>
+                <div>
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" placeholder="Nhập mật khẩu">
+                    <div id="passwordError" class="error"></div>
+                </div>
+                <div>
+                    <button type="button" onclick="login()">ĐĂNG NHẬP</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="password">Mật khẩu</label>
-            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu">
-        </div>
-        <div>
-            <button type="button" onclick="login()">ĐĂNG NHẬP</button>
-        </div>
-    </form>
-</div>
 
         <!-- footer -->
         <div class="footer">
