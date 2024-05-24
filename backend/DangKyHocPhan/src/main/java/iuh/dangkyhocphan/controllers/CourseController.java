@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping(path="/api/admin/courses")
@@ -38,33 +35,33 @@ public class CourseController {
     @GetMapping("/getCourseInAllSemester")
     public ResponseEntity<ResponseObject> getCourseBySemester() {
         List<Course> courses = courseService.findAll();
-        System.out.println(courses.size());
-        courses.forEach(System.out::println);
-        Map<String, List<Map<String, String>>> result = new HashMap<>();
+        List<Map<String, Object>> result = new ArrayList<>();
         for(int i = 1 ; i <= 9 ; i++) {
-            List<Map<String, String>> dsTemp = new ArrayList<>();
+            Map<String, Object> itemCourse = new LinkedHashMap<>();
+            List<Map<String, Object>> listCourse = new ArrayList<>();
 
              for(int j = 0 ; j < courses.size() ; j++) {
-                 Map<String, String> courseTemp = new HashMap<>();
-
                 if(courses.get(j).getHocKy().equals("Học kỳ " + i)) {
-                    courseTemp.put("id", courses.get(j).getId().toString());
-                    courseTemp.put("tenMonHoc", courses.get(j).getTenMonHoc());
-                    courseTemp.put("soTinChi", String.valueOf(courses.get(j).getSoTinChi()));
-                    courseTemp.put("hocKy", courses.get(j).getHocKy());
-                    List<Map<String, String>> dsMonTienQuyet = new ArrayList<>();
+                    Map<String, Object> listCourseItem = new LinkedHashMap<>();
+                    List<Map<String, Object>> listCoursePrerequisite = new ArrayList<>();
+                    Map<String, Object> listCoursePrerequisiteItem = new LinkedHashMap<>();
+                    listCourseItem.put("id", courses.get(j).getId().toString());
+                    listCourseItem.put("tenMonHoc", courses.get(j).getTenMonHoc());
+                    listCourseItem.put("soTinChi", String.valueOf(courses.get(j).getSoTinChi()));
+                    listCourseItem.put("hocKy", courses.get(j).getHocKy());
                     courses.get(j).getMonTienQuyet().forEach(course -> {
-                        Map<String, String> monTienQuyet = new HashMap<>();
-                        monTienQuyet.put("id", course.getId().toString());
-                        monTienQuyet.put("tenMonHoc", course.getTenMonHoc());
-                        dsMonTienQuyet.add(monTienQuyet);
+                        listCoursePrerequisiteItem.put("id", course.getId().toString());
+                        listCoursePrerequisiteItem.put("tenMonHoc", course.getTenMonHoc());
+                        listCoursePrerequisite.add(listCoursePrerequisiteItem);
                     });
 
-                    courseTemp.put("monTienQuyet", dsMonTienQuyet.toString());
-                    dsTemp.add(courseTemp);
+                    listCourseItem.put("monTienQuyet", listCoursePrerequisite);
+                    listCourse.add(listCourseItem);
                 }
             }
-             result.put("Học kỳ " + i, dsTemp);
+            itemCourse.put( "hocKy","Học kỳ " + i);
+            itemCourse.put( "monHoc",listCourse);
+            result.add(itemCourse);
         }
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("Success", "List course in all semester", result)

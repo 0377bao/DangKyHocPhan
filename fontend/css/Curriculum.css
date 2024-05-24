@@ -99,7 +99,6 @@ body{
 
 .footer{
     margin-top: 30px;
-    position: relative;
     background-color: #0069d9;
     color: #fff;
     display: flex;
@@ -107,6 +106,7 @@ body{
     font-size: 15px;
     padding: 10px 0;
     line-height: 1.5em;
+    height: 153px;
 }
 
 .left-footer{
@@ -124,6 +124,7 @@ body{
     background-color: #0099FF;
     color: #fff;
     font-size: 10px;
+    height: 42px;
 }
 
 .content-subject{
@@ -140,7 +141,8 @@ body{
 }
 
 .table-register{
-    max-height: 550px;
+
+    min-width: 100%;
 
     table{
         width: 98%;
@@ -170,7 +172,24 @@ body{
         background-color: #EEEEEE;
     
     }
+    th, td {
+        padding: 5px 10px;
+    }
 }
+
+.title__credits {
+    display: block;
+    font-size: 17px;
+    font-weight: bold; 
+    padding: 5px 10px;
+
+}
+
+.title__credits--highlight {
+    color: red;
+    margin-left: 5px;
+}
+
 
 /* Chỉnh sửa CSS cho màn hình nhỏ hơn 600px: */
 
