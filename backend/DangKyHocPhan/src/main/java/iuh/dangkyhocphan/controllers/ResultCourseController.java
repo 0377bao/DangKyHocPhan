@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
 @RestController
-@RequestMapping("/api/dkhp/ResultCourse")
+    @RequestMapping("/api/dkhp/ResultCourse")
 public class ResultCourseController {
     @Autowired
     private EnrollmentService enrollmentService;
@@ -40,6 +40,7 @@ public class ResultCourseController {
                 boolean ketQuaKhoaHoc = enrollment.getResultCourse() != null;
                 ketQua.put("maLopHocPhan", enrollment.getClazz().getId());
                 ketQua.put("tenMonHoc", enrollment.getClazz().getCourse().getTenMonHoc());
+                ketQua.put("soTinChi", enrollment.getClazz().getCourse().getSoTinChi());
                 ketQua.put("giuaKi", ketQuaKhoaHoc ? enrollment.getResultCourse().getDiemGiuaKi() : "");
                 ketQua.put("diemThuongXuyen", ketQuaKhoaHoc ? enrollment.getResultCourse().getDiemThuongKi() : "");
                 ketQua.put("diemThucHanh", ketQuaKhoaHoc ? enrollment.getResultCourse().getDiemThucHanh() : "");

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
         data.forEach((semester) => {
             // Add semester header
             const semesterRow = document.createElement('tr');
-            semesterRow.innerHTML = `<td colspan="9">${semester.hocKi}</td>`;
+            semesterRow.innerHTML = `<td colspan="12" style="padding: 5px; text-align: left; ">${semester.hocKi}</td>`;
             tbody.appendChild(semesterRow);
 
             semester.ketQua.forEach((result, index) => {
@@ -24,12 +24,27 @@ document.addEventListener("DOMContentLoaded", function() {
                     <td>${index + 1}</td>
                     <td>${result.maLopHocPhan}</td>
                     <td>${result.tenMonHoc}</td>
-                    <td>ㅤ</td> <!-- Placeholder for number of certificates -->
-                    <td>${formatScore(averageScore(result.diemThuongXuyen))}</td>
-                    <td>${formatScore(averageScore(result.diemThuongXuyen))}</td>
-                    <td>${formatScore(averageScore(result.diemThucHanh))}</td>
+                    <td>${result.soTinChi} </td> <!-- Placeholder for number of certificates -->
+                    <td>${formatScore(result.giuaKi)}</td>
+                    <td>
+                        <table class="nested_table" style="border-collapse: separate;">
+                            <tr>
+                                ${result.diemThuongXuyen.length != 0 ? result.diemThuongXuyen.map(score =>`<td>${score}</td>`).join('') : `<td> </td>`}
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="nested_table">
+                        <tr>
+                        ${result.diemThucHanh.length != 0 ? result.diemThucHanh.map(score => `<td>${score}</td>`).join('') : `<td> </td>`}
+                    </tr>
+                        </table>
+                    </td>
                     <td>${formatScore(result.diemCuoiKi)}</td>
                     <td>${formatScore(result.diemTongKet)}</td>
+                    <td>${formatScore(result.thangDiem4)}</td>
+                    <td>${result.diemChu}</td>
+                    <td>${result.thangDiem4== 0.0 ? "Không đạt" : "Đạt"}</td>
                 `;
                 tbody.appendChild(row);
             });

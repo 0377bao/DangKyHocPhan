@@ -40,6 +40,7 @@ public class TeacherController {
                 new ResponseObject("Success", "List of all teachers", dsGiangVien)
         );
     }
+
     @GetMapping("/getTeacherDetail/{classId}")
     public ResponseEntity<ResponseObject> getTeacherDetailByClassId(@PathVariable Long classId) {
         Teacher teacher = teacherService.findTeacherByClassId(classId);

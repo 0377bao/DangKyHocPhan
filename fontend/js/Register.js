@@ -314,4 +314,54 @@
                     }
                 } )
         }
+
+function getDetailsInfoTeacher(classId) {
+    const containerModel = document.querySelector(".info_teacher")
+    fetch("http://localhost:8080/api/admin/teachers/getTeacherDetail/" + classId)
+        .then(response => response.json())
+        .then(data => {
+            var infoTeacher = data.data;
+            var html = `
+                <h2 class="text-center">${infoTeacher.hoTen}</h2>
+                <div class="info_teacher d-flex justify-content-between">
+                    <div class="left_info">
+                        <p>Mã nhân sự: <b>${infoTeacher.id}</b></p>
+                        <p>Ngày sinh: <b>${(infoTeacher.ngaySinh).split('-').reverse().join('-')}</b></p>
+                        <p>Chức vụ: <b>${infoTeacher.chuyenNganh}</b></p>
+                    </div>
+                    <div class="right_info">
+                        <p>Giới tính: <b>${infoTeacher.gioiTinh ? "Nam": "Nữ"}</b></p>
+                        <p>Nơi sinh: <b>${infoTeacher.diaChi}</b></p>
+                        <p>Phòng ban: <b>${infoTeacher.khoa}</b></p>
+                    </div>
+                </div>
+            `
+            containerModel.innerHTML += html
+        })
+}
+
+function getAllScheduleDuplicateOfStudent(studentID, classID, semester) {
+    const tbodyTable = document.querySelector(".list_schedule")
+    fetch(`http://localhost:8080/api/dkhp/Enrollment/checkForDuplicateSchedule?studentId=${encodeURIComponent(studentID)}&classId=${encodeURIComponent(classID)}&hocKi=${encodeURIComponent(semester)}`)
+        .then(response => response.json())
+        .then(data =>{
+            if(data.success == "Failed") alert("Not find schedule duplicated")
+            else {
+                var html = data.data.map((schedule, index) => {
+                    return `
+                        <tr class="text-center">
+                            <td>${index + 1}</td>
+                            <td>${schedule.maLopHocPhan}</td>
+                            <td>${schedule.tenMonHoc}</td>
+                            <td>${schedule.ngayBatDau}</td>
+                            <td>${schedule.ngayKetThuc}</td>
+                            <td>${schedule.thu}</td>
+                            <td>${schedule.tietHoc}</td>
+                        </tr>
+                    `
+                })
+                tbodyTable.innerHTML += html.join(" ")
+            }
+        } )
+}
  

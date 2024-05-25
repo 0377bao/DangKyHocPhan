@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,7 +6,7 @@
 
 body {
     background-color: #fff;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,11 +14,11 @@ body {
     padding-bottom: 10px;
 }
 
-.container{
-   display: block;
-   width: 90%;
-   max-width: 1200px;
-   margin: auto;
+.container {
+    display: block;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .logo-banner {
@@ -30,7 +30,7 @@ body {
     height: auto;
 }
 
-.menu{
+.menu {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -38,7 +38,7 @@ body {
     line-height: 2em;
     border-style: ridge;
 }
-.menu-personal{
+.menu-personal {
     background-color: #4eb0ff;
     padding: 5px 15px;
     color: #fff;
@@ -57,30 +57,30 @@ body {
         cursor: pointer;
         margin-top: 10px;
         margin-bottom: 10px;
-        width: 200px; 
-        text-align: center; 
+        width: 200px;
+        text-align: center;
         margin-left: 10px;
     }
 }
 
-.img-avatar{
+.img-avatar {
     width: 100px;
     height: 100px;
     border-radius: 100%;
     margin-left: 75px;
 }
 
-.menu-item a{
+.menu-item a {
     margin-left: 80px;
     text-decoration: none;
 }
 
-.content{
+.content {
     border-style: ridge;
     margin-top: 1px;
 }
 
-.content h2{
+.content h2 {
     text-align: center;
     color: #0c6fbe;
     font-size: 23px;
@@ -94,7 +94,8 @@ form .content-both {
     padding: 20px;
 }
 
-.content-left, .content-right {
+.content-left,
+.content-right {
     width: 48%;
 }
 
@@ -109,7 +110,7 @@ form .content-both {
     font-weight: bold;
 }
 
-.form-group input, 
+.form-group input,
 .form-group select,
 .form-group textarea {
     width: calc(100% - 160px);
@@ -151,7 +152,8 @@ form button {
     margin-top: 10px;
 }
 
-.create-table th, .create-table td {
+.create-table th,
+.create-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
@@ -171,7 +173,7 @@ form button {
     background-color: #f1f1f1;
 }
 
-.footer{
+.footer {
     margin-top: 30px;
     background-color: #0069d9;
     color: #fff;
@@ -182,14 +184,15 @@ form button {
     line-height: 1.5em;
 }
 
-.left-footer, .right-footer {
+.left-footer,
+.right-footer {
     padding: 10px;
 }
 
-.footer-butoom{
+.footer-butoom {
     padding: 15px;
     text-align: center;
-    background-color: #0099FF;
+    background-color: #0099ff;
     color: #fff;
     font-size: 10px;
 }
