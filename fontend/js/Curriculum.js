@@ -30,7 +30,7 @@ function updateCoursesTable(data) {
                     <td style="text-align: center;">${course.id}</td>
                     <td style="text-align: center;">${course.tenMonHoc}</td>
                     <td style="text-align: center;">${course.id}</td> <!-- Assuming Mã học phần could be the same as course id -->
-                    <td style="text-align: center; max-width: 260px">${course.monTienQuyet.map(item => item.tenMonHoc).join(', ') || ''}</td>
+                    <td style="text-align: center; max-width: 260px">${course.monTienQuyet.map(item => item.id).join(', ') || ''}</td>
                     <td style="text-align: center;">${course.soTinChi}</td>
                 `;
                 tbody.appendChild(row);

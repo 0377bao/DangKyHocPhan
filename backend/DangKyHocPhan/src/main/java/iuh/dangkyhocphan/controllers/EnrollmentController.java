@@ -58,6 +58,33 @@ public class EnrollmentController {
                 new ResponseObject("Failed", "Can't find list enrollment by student id = " + id, "")
         );
     }
+    @GetMapping("/getEnrollmentByStudentIdAngSemester")
+    public ResponseEntity<ResponseObject> getEnrollmentByStudentIdAngSemester(@RequestParam("studentId") Long id, @RequestParam("hocKy") String hocKy) {
+        List<Enrollment> enrollmentList = enrollmentService.getEnrollmentByStudentIdAngSemester(id, hocKy);
+        List<Map> dsDangKy = new ArrayList<>();
+        if (enrollmentList.size() != 0) {
+            enrollmentList.forEach(enrollItem -> {
+                Map<String, Object> result = new HashMap<String, Object>();
+                result.put("classId", enrollItem.getClazz().getId());
+                result.put("tenLopHocPhan", enrollItem.getClazz().getTenLop());
+                result.put("tenGiangVien", enrollItem.getClazz().getGiangVien().getHoTen());
+                result.put("tenMonHoc", enrollItem.getClazz().getCourse().getTenMonHoc());
+                result.put("soTinChi", enrollItem.getClazz().getCourse().getSoTinChi());
+                result.put("hocPhi", enrollItem.getClazz().getCourse().getHocPhi());
+                result.put("ngayBatDau", enrollItem.getNgayBatDau());
+                result.put("ngayKetThuc", enrollItem.getNgayKetThuc());
+                result.put("trangThaiLop", enrollItem.getClazz().getTrangThai());
+                dsDangKy.add(result);
+            });
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new ResponseObject("Success", "Query list enrollment by student id = " + id, dsDangKy)
+            );
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("Success", "Query list enrollment by student id = " + id, new ArrayList<>())
+        );
+    }
 
     // view detail class enrollment by clazzId
     @GetMapping("/detail/{classId}")
@@ -69,6 +96,7 @@ public class EnrollmentController {
             List<Schedule> scheduleList = clazzService.findScheduleOfClazz(classId);
             scheduleList.forEach(schedule -> {
                 Map<String, Object> result = new HashMap<String, Object>();
+                result.put("maLopHocPhan", schedule.getClazz().getId());
                 result.put("thu", schedule.getThu());
                 result.put("loaiLich", schedule.getLoaiLich());
                 result.put("phongHoc", schedule.getPhongHoc());

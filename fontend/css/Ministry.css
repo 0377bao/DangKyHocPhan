@@ -16,16 +16,18 @@ body {
 
 .container {
     display: block;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .logo-banner {
-    text-align: center; /* Canh giữa hình ảnh */
+    text-align: center;
 }
 
 .logo-banner img {
-    width: 100%; /* Tăng chiều rộng hình ảnh để nó chiếm toàn bộ chiều rộng của phần tử cha */
-    height: auto; /* Đảm bảo tỷ lệ khung hình không bị thay đổi */
-    margin: 0 auto; /* Canh giữa hình ảnh bằng cách đặt margin trái và phải là auto */
+    width: 100%;
+    height: auto;
 }
 
 .menu {
@@ -38,7 +40,7 @@ body {
 }
 .menu-personal {
     background-color: #4eb0ff;
-    padding: 5px 15px 5px 15px;
+    padding: 5px 15px;
     color: #fff;
     position: relative;
     line-height: 2em;
@@ -48,9 +50,8 @@ body {
         background: #eb7b21;
         border: none;
         color: #fff;
-        font-size: 18px; /* Tăng kích thước font chữ */
+        font-size: 18px;
         outline: 0;
-        border-radius: 0;
         padding: 6px 12px;
         font-weight: 600;
         cursor: pointer;
@@ -73,141 +74,107 @@ body {
     margin-left: 80px;
     text-decoration: none;
 }
+
 .content {
     border-style: ridge;
     margin-top: 1px;
-
-    h2 {
-        text-align: center;
-        color: #0c6fbe;
-        font-size: 23px;
-        margin-top: 20px;
-        font-weight: bolder;
-    }
 }
 
-.content-register {
-    display: block;
-    max-width: 600px;
+.content h2 {
     text-align: center;
-    padding: 10xp 0;
-    margin-top: 5px;
-    margin-left: 100px;
-
-    b {
-        color: #000000;
-        font-size: 15px;
-    }
-
-    Select {
-        width: 25%;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 15px;
-        text-align: center;
-        height: 30px;
-        margin-left: 15px;
-        color: #222222;
-    }
-    option {
-        font-size: 20px;
-        color: #222222;
-    }
-
-    input {
-        font-size: 15px;
-        color: #000000;
-        margin-left: 12px;
-    }
-
-    label {
-        font-size: 14px;
-        color: #000000;
-        margin-left: 2px;
-        color: crimson;
-        font-weight: bolder;
-    }
+    color: #0c6fbe;
+    font-size: 23px;
+    margin-top: 20px;
+    font-weight: bolder;
 }
 
-.content-subject {
-    h3 {
-        text-align: center;
-        color: #eb7b21;
-        font-size: 19px;
-        margin-top: 20px;
-        font-weight: bold;
-        text-transform: uppercase;
-        position: relative;
-        margin-bottom: 20px;
-    }
+form .content-both {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
 }
 
-.table-register {
-    max-height: 350px;
-
-    table {
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 20px;
-        height: 200px;
-    }
-    thead {
-        background-color: #0c6fbe;
-        color: #fff;
-        height: 50px;
-    }
-    tr {
-        display: table-row;
-        vertical-align: inherit;
-        unicode-bidi: isolate;
-        border-color: inherit;
-    }
+.content-left,
+.content-right {
+    width: 48%;
 }
 
-.content-honestly {
-    text-align: center;
-    margin-bottom: 20px;
-
-    label {
-        font-size: 17px;
-        color: #444444;
-        margin-left: -30px;
-    }
-
-    Select {
-        width: 15%;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 15px;
-        text-align: center;
-        height: 30px;
-        margin-left: 15px;
-        color: #222222;
-        margin-left: 20px;
-    }
-}
-
-.register-subject {
-    background: #eb7b21;
-    border: none;
-    color: #fff;
-    font-size: 15px; /* Tăng kích thước font chữ */
-    font-weight: 600;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 200px;
-    height: 40px;
-    text-align: center;
-    justify-content: center;
+.form-group {
+    display: flex;
     align-items: center;
-    margin-left: 450px;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    width: 150px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: calc(100% - 160px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.sub-group {
+    padding-left: 20px;
+    border-left: 2px solid #ccc;
+}
+
+form button {
+    background: #0069d9;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+}
+
+.create-table {
+    margin-top: 20px;
+}
+
+.create-table h3 {
+    text-align: center;
+    color: #0c6fbe;
+    margin-bottom: 10px;
+}
+
+.create-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.create-table th,
+.create-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.create-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.create-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.create-table tr:hover {
+    background-color: #f1f1f1;
 }
 
 .footer {
     margin-top: 30px;
-    position: relative;
     background-color: #0069d9;
     color: #fff;
     display: flex;
@@ -217,11 +184,7 @@ body {
     line-height: 1.5em;
 }
 
-.left-footer {
-    padding: 10px;
-    text-align: left;
-}
-
+.left-footer,
 .right-footer {
     padding: 10px;
 }

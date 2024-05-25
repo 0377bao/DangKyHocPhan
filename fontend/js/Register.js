@@ -1,5 +1,11 @@
-
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            alert('User not logged in');
+            window.location.href = "Home.html";
+        }
         let selectedClassId = null;
+        let ngayBatDau = '';
+        let ngayKetThuc = '';
     
         function login() {
             // Chuyển hướng sang trang Home.html
@@ -8,17 +14,38 @@
     
         document.addEventListener("DOMContentLoaded", function() {
             // Initial fetch when the page loads
+            loadSelectItem();
+        });
+
+        function loadSelectItem() {
+            fetch(`http://localhost:8080/api/dkhp/Student/getStudentDetail/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                updateStudentDetails(data);
+            })
+            .catch(error => console.error('Error fetching student details:', error));
+        }
+
+        function updateStudentDetails(data) {
+            const selectComponent = document.getElementById("semesterSelect");
+            const content = [];
+            for(let i = 0; i < 12; i++) {
+                const yearCourse = Math.floor(i / 3);
+                const year = (i + 1) % 3 == 0 ? 3 : (i + 1) % 3;
+                const yearStudent = Number(data.nienKhoa.split('-')[0]);
+                content.push(`<option value="Học Kỳ ${year} (${yearStudent + yearCourse}-${yearStudent + yearCourse + 1})">Học Kỳ ${year} (${yearStudent + yearCourse}-${yearStudent + yearCourse + 1})</option>`);
+            }
+            selectComponent.innerHTML = content.join('');
             fetchCourseData();
             fetchEnrollmentData();
-        });
+        }
     
         function fetchCourseData() {
             const semesterId = document.getElementById('semesterSelect').value;
-            fetch(`http://localhost:8080/api/dkhp/CourseOpening/${semesterId}`)
+            fetch(`http://localhost:8080/api/dkhp/CourseOpening/getCourseOpening?studentId=${userId}&hocKy=${semesterId}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Fetched course data:', data); // Debugging line
-                    updateCoursesTable(data.data.dsKhoaHoc);
+                    updateCoursesTable(data.data?.dsKhoaHoc);
                 })
                 .catch(error => console.error('Error fetching course data:', error));
         }
@@ -26,7 +53,7 @@
         function updateCoursesTable(courses) {
             const tbody = document.querySelector('.table-register tbody');
             tbody.innerHTML = ''; // Clear existing rows
-            courses.forEach((course, index) => {
+            courses?.forEach((course, index) => {
                 const prerequisites = course.monTienQuyet?.map((item) => item.tenMonHoc).join(', ') || '';
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -61,17 +88,26 @@
             classes.forEach((clazz, index) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td><input type="radio" name="classSelection" onclick="fetchCourseDetails(${clazz.maLop}); selectedClassId = ${clazz.maLop};"></td>
+                    <td><input type="radio" name="classSelection" onclick="handleClickRadioButtonClass(${clazz.maLop},'${clazz.ngayBatDau}', '${clazz.ngayKetThuc}')"></td>
                     <td>${index + 1}</td>
                     <td>${clazz.maLop}</td>
                     <td>${clazz.tenMonHoc}</td>
                     <td>${clazz.tenLop}</td>
                     <td>${clazz.siSoToiDa}</td>
                     <td>${clazz.siSoHienTai}</td>
+                    <td>${clazz.ngayBatDau}</td>
+                    <td>${clazz.ngayKetThuc}</td>
                     <td>${clazz.trangThai}</td>
                 `;
                 tbody.appendChild(row);
             });
+        }
+
+        const handleClickRadioButtonClass = (classid, startDate, endDate) => {
+            selectedClassId = classid;
+            ngayBatDau = startDate;
+            ngayKetThuc = endDate;
+            fetchCourseDetails(selectedClassId);
         }
     
         function fetchCourseDetails(classId) {
@@ -93,26 +129,27 @@
                 row.innerHTML = `
                     <td>${index + 1}</td>
                     <td>${detail.thu}</td>
+                    <td>${detail.tietHoc}</td>
                     <td>${detail.loaiLich}</td>
                     <td>${detail.phongHoc}</td>
-                    <td>${detail.tietHoc}</td>
                     <td>Cơ sở 1</td>
                     <td>${detail.tenGiangVien}</td>
-                    <td><button type="button" style="background-color: #0069d9; color: #fff; border-width: 0; height: 25px; width: 45%;">Xem</button></td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#teacherDetail" style="background-color: #0069d9; color: #fff; border-width: 0; padding: 5px 10px; border-radius: 5px;"
+                    onclick="getDetailsInfoTeacher('${detail.maLopHocPhan}')"
+                    >Xem</button></td>
                 `;
                 tbody.appendChild(row);
             });
         }
     
         function registerCourse() {
-            const semesterId = document.getElementById('semesterSelect').value;
-            const semesterText = document.getElementById('semesterSelect').options[document.getElementById('semesterSelect').selectedIndex].text;
+            const semester = document.getElementById('semesterSelect').value;
             const requestBody = {
-                "student_id": 1,
+                "student_id": userId,
                 "class_id": selectedClassId,
-                "ngayBatDau": "2021-08-18",
-                "ngayKetThuc": "2021-12-10",
-                "hocKi": semesterText
+                "ngayBatDau": ngayBatDau,
+                "ngayKetThuc": ngayKetThuc,
+                "hocKi": semester
             };
     
             fetch('http://localhost:8080/api/dkhp/Enrollment/createEnrollment', {
@@ -125,8 +162,13 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Registration successful:', data);
-                alert('Đăng ký thành công!');
-                addEnrollmentToTable(data.data); // Add new enrollment to the table
+                alert(data.message);
+                if(data.status === 'Success') {
+                    fetchCourseData();
+                    fetchEnrollmentData();
+                    document.querySelector(".content-subject4").style.display = 'none';
+                    document.querySelector(".content-subject1").style.display = 'none';
+                }
             })
             .catch(error => console.error('Error registering course:', error));
         }
@@ -135,20 +177,16 @@
             const tbody = document.querySelector('.table-register3 tbody');
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td><img src="../img/option.png" alt="" onclick="showCancelOption(this, ${enrollment.classId})"></td>
-                <td>${tbody.children.length + 1}</td>
-                <td>${enrollment.classId}</td>
-                <td>${enrollment.tenMonHoc}</td>
-                <td>${enrollment.tenLopHocPhan}</td>
-                <td>${enrollment.soTinChi}</td>
-                <td>-</td>
-                <td>${enrollment.hocPhi}</td>
-                <td>${enrollment.ngayKetThuc}</td>
-                <td><img src="../img/check.png" alt=""></td>
-                <td>Đăng ký mới</td>
-                <td>${enrollment.ngayBatDau}</td>
-                <td>${enrollment.trangThaiLop}</td>
-            `;
+            <td><img src="../img/option.png" alt="" onclick="showCancelOption(this, ${enrollment.classId})"></td>
+            <td>${index + 1}</td>
+            <td>${enrollment.classId}</td>
+            <td>${enrollment.tenMonHoc}</td>
+            <td>${enrollment.tenLopHocPhan}</td>
+            <td>${enrollment.soTinChi}</td>
+            <td>${enrollment.hocPhi}</td>
+            <td>${enrollment.trangThaiLop == "Đã khóa lớp" ? "Đã đăng ký" : "Đăng ký mới" }</td>
+            <td>${enrollment.trangThaiLop}</td>
+        `;
             tbody.appendChild(row);
         }
     
@@ -183,26 +221,21 @@
     
         function fetchEnrollmentData() {
             const semesterId = document.getElementById('semesterSelect').value;
-            fetch(`http://localhost:8080/api/dkhp/Enrollment/${semesterId}`)
+            fetch(`http://localhost:8080/api/dkhp/Enrollment/getEnrollmentByStudentIdAngSemester?studentId=${userId}&hocKy=${semesterId}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Fetched enrollment data:', data); // Debugging line
                     if (data.status === 'Failed') {
                         console.error(`Error: ${data.message}`);
                         return;
                     }
-                    updateEnrollmentTables(data.data, semesterId);
+                    updateEnrollmentTables(data.data);
                 })
                 .catch(error => console.error('Error fetching enrollment data:', error));
         }
     
-        function updateEnrollmentTables(enrollments, semesterId) {
+        function updateEnrollmentTables(enrollments) {
             const tbodyLocked = document.querySelector('.table-register2 tbody');
-            const tbodyPending = document.querySelector('.table-register3 tbody');
             tbodyLocked.innerHTML = ''; // Clear existing rows
-            tbodyPending.innerHTML = ''; // Clear existing rows
-    
-            console.log('Updating enrollment tables for semester:', semesterId, enrollments); // Debugging line
     
             if (!Array.isArray(enrollments)) {
                 console.error('Enrollments data is not an array:', enrollments);
@@ -218,28 +251,68 @@
                     <td>${enrollment.tenMonHoc}</td>
                     <td>${enrollment.tenLopHocPhan}</td>
                     <td>${enrollment.soTinChi}</td>
-                    <td>-</td>
                     <td>${enrollment.hocPhi}</td>
-                    <td>${enrollment.ngayKetThuc}</td>
-                    <td><img src="../img/check.png" alt=""></td>
-                    <td>Đăng ký mới</td>
-                    <td>${enrollment.ngayBatDau}</td>
+                    <td>${enrollment.trangThaiLop == "Đã khóa lớp" ? "Đã đăng ký" : "Đăng ký mới" }</td>
                     <td>${enrollment.trangThaiLop}</td>
                 `;
-    
-                if (enrollment.trangThaiLop === "Đã khóa lớp") {
-                    tbodyLocked.appendChild(row);
-                } else if (enrollment.trangThaiLop === "Chờ sinh viên đăng ký") {
-                    tbodyPending.appendChild(row);
-                }
+                tbodyLocked.appendChild(row);
             });
     
             // Show both tables
             const contentLocked = document.querySelector('.content-subject2:nth-of-type(1)');
-            const contentPending = document.querySelector('.content-subject2:nth-of-type(2)');
     
             contentLocked.style.display = 'block';
-            contentPending.style.display = 'block';
+        }
+
+        function getDetailsInfoTeacher(classId) {
+            const containerModel = document.querySelector(".info_teacher")
+            fetch("http://localhost:8080/api/admin/teachers/getTeacherDetail/" + classId)
+                .then(response => response.json())
+                .then(data => {
+                    var infoTeacher = data.data;
+                    var html = `
+                        <h2 class="text-center mb-3">${infoTeacher.hoTen}</h2>
+                        <div class="info_teacher d-flex justify-content-between">
+                            <div class="left_info">
+                                <p>Mã nhân sự: <b>${infoTeacher.id}</b></p>
+                                <p>Ngày sinh: <b>${(infoTeacher.ngaySinh).split('-').reverse().join('-')}</b></p>
+                                <p>Chức vụ: <b>${infoTeacher.chuyenNganh}</b></p>
+                            </div>
+                            <div class="right_info">
+                                <p>Giới tính: <b>${infoTeacher.gioiTinh ? "Nam": "Nữ"}</b></p>
+                                <p>Nơi sinh: <b>${infoTeacher.diaChi}</b></p>
+                                <p>Phòng ban: <b>${infoTeacher.khoa}</b></p>
+                            </div>
+                        </div>
+                    `
+                    containerModel.innerHTML = html;
+                })
+        }
+
+        function getAllScheduleDuplicateOfStudent() {
+            const semesterId = document.getElementById('semesterSelect').value;
+            const tbodyTable = document.querySelector(".list_schedule")
+            fetch(`http://localhost:8080/api/dkhp/Enrollment/checkForDuplicateSchedule?studentId=${encodeURIComponent(userId)}&classId=${encodeURIComponent(selectedClassId)}&hocKi=${encodeURIComponent(semesterId)}`)
+                .then(response => response.json())
+                .then(data =>{
+                    if(data.success == "Failed") alert("Not find schedule duplicated")
+                    else {
+                        var html = data.data.map((schedule, index) => {
+                            return `
+                                <tr class="text-center">
+                                    <td>${index + 1}</td>
+                                    <td>${schedule.maLopHocPhan}</td>
+                                    <td>${schedule.tenMonHoc}</td>
+                                    <td>${schedule.ngayBatDau}</td>
+                                    <td>${schedule.ngayKetThuc}</td>
+                                    <td>${schedule.thu}</td>
+                                    <td>${schedule.tietHoc}</td>
+                                </tr>
+                            `
+                        })
+                        tbodyTable.innerHTML = html.join(" ")
+                    }
+                } )
         }
 
 function getDetailsInfoTeacher(classId) {

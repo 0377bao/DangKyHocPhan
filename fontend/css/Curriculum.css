@@ -185,6 +185,11 @@ body{
 
 }
 
+.title__credits--main {
+    display: inline-block;
+    width: 160px;
+}
+
 .title__credits--highlight {
     color: red;
     margin-left: 5px;

@@ -54,5 +54,7 @@ public class CourseOpeningService implements IService<CourseOpening, Long> {
     public boolean existsById(Long id) {
         return false;
     }
-
+    public CourseOpening findCourseOpeningByhocky(String hocky) {
+        return repository.findCourseOpeningByhocky(hocky);
+    }
 }

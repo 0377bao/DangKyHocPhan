@@ -21,19 +21,163 @@
                 <p><h3>Nguyễn Ngọc Phượng</h3></p>
                 <p>Giới tính:ㅤㅤㅤㅤNữ</p>
                 <p>SĐT:ㅤㅤㅤㅤㅤㅤ0964709810</p>
-                <p>Chức vụ:ㅤㅤㅤㅤGiáo vụ</p> -->
-                </div>
+                <p>Chức vụ:ㅤㅤㅤㅤGiáo vụ</p>
 
-                <div class="img-avatar">
-                    <img src="../img/user.png" alt="user" />
-                </div>
-
-                <!-- Menu đăng ký học phần -->
-                <div class="menu-item">
-                    <a href="HomeMinistry.html">THÔNG TIN GIẢNG VIÊN</a> <br />
-                    <a href="Ministry.html">TẠO LỚP HỌC PHẦN</a> <br />
-                </div>
+                <button type="button" onclick="logout()">Đăng xuất</button>
             </div>
+
+            <div class="img-avatar">
+                <img src="../img/user.png" alt="user">
+            </div>
+
+            <!-- Menu đăng ký học phần -->
+            <div class="menu-item">
+                <a href="HomeMinistry.html">THÔNG TIN GIẢNG VIÊN</a> <br>
+                <a href="Ministry.html">TẠO LỚP HỌC PHẦN</a> <br>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="content">
+            <h2>TẠO LỚP HỌC PHẦN</h2>
+            <form id="createClassForm">
+                <div class="content-both">
+                    <!-- Đợt tạo lớp -->
+                    <div class="content-left">
+                        <div class="form-group">
+                            <label for="administratorId">Mã giáo vụ:</label>
+                            <input type="number" id="administratorId" placeholder="Nhập mã GV">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="semesterId">Nhập mã học kỳ:</label>
+                            <input type="number" id="semesterId" placeholder="Nhập mã học kỳ">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="classId">Mã lớp:</label>
+                            <input type="number" id="classId" placeholder="Nhập mã lớp">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="className">Tên lớp:</label>
+                            <input type="text" id="className" placeholder="Nhập tên lớp học phần">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="courseId">Mã khóa học:</label>
+                            <input type="number" id="courseId" placeholder="Nhập mã khóa học">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subjectName">Tên môn học:</label>
+                            <input type="text" id="subjectName" placeholder="Nhập tên môn học">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="credits">Số tín chỉ:</label>
+                            <input type="number" id="credits" placeholder="Nhập số tín chỉ">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="teacherId">teacherId:</label>
+                            <input type="number" id="teacherId" placeholder="Mã giảng viên">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="teacherName">Tên giảng viên:</label>
+                            <input type="text" id="teacherName" placeholder="Nhập tên giảng viên">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="startDate">Ngày bắt đầu:</label>
+                            <input type="date" id="startDate">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="endDate">Ngày kết thúc:</label>
+                            <input type="date" id="endDate">
+                        </div>
+                    </div>
+                    <div class="content-right">
+                        <div class="form-group">
+                            <label for="currentSize">Sỉ số hiện tại:</label>
+                            <input type="number" id="currentSize" placeholder="Nhập sỉ số">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="maxSize">Sỉ số tối đa:</label>
+                            <input type="number" id="maxSize" placeholder="Nhập sỉ số tối đa">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Trạng thái:</label>
+                            <select id="status">
+                                <option value="">Chọn trạng thái</option>
+                                <option value="Đã đóng">Đã đóng</option>
+                                <option value="Chờ đăng ký">Chờ đăng ký</option>
+                            </select>
+                        </div>    
+
+                        <div class="form-group">
+                            <label for="theorySchedule">Lịch học lý thuyết:</label>
+                        </div>
+                        <div class="sub-group">
+                            <div class="form-group">
+                                <label for="day">Thứ:</label>
+                                <input type="text" id="day">
+                            </div>
+                            <div class="form-group">
+                                <label for="lesson">Tiết học:</label>
+                                <input type="text" id="lesson" placeholder="Nhập tiết học">
+                            </div>
+                            <div class="form-group">
+                                <label for="classroom">Phòng học:</label>
+                                <input type="text" id="classroom" placeholder="chọn phòng học">
+                            </div>
+                            <div class="form-group">
+                                <label for="scheduleType">Loại lịch:</label>
+                                <input type="text" id="scheduleType" placeholder="Lý thuyết">
+                            </div>
+                            <div class="form-group">
+                                <label for="note">Ghi chú:</label>
+                                <textarea id="note"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="practiceSchedule">Lịch học TH:</label>
+                            <input type="text" id="practiceSchedule" placeholder="Nhập lịch học TH">
+                        </div>
+                    </div>              
+                </div>
+                <div class="form-group">
+                    <button type="submit">Lưu thông tin</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Thêm thông tin vào bảng -->
+        <div class="create-table">
+            <h3>THÔNG TIN LỚP HỌC PHẦN</h3>
+            <form action="" class="table-register">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã LHP</th>
+                            <th>Tên Lớp học phần</th>
+                            <th>Môn học</th>
+                            <th>Lớp dự kiến</th>
+                            <th>Sĩ số hiện tại</th>
+                            <th>Sĩ số tối đa</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </form>
+        </div>
 
             <!-- content -->
             <div class="content">
@@ -136,6 +280,80 @@
             </div>
         </div>
 
-        <script src="../js/Ministry.js"></script>
-    </body>
+    <script src="../js/Ministry.js"></script>
+    <script>
+        document.getElementById('createClassForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = {
+                administratorId: parseInt(document.getElementById('administratorId').value),
+                semesterId: parseInt(document.getElementById('semesterId').value),
+                classId: parseInt(document.getElementById('classId').value),
+                tenLop: document.getElementById('className').value,
+                courseId: parseInt(document.getElementById('courseId').value),
+                tenMonHoc: document.getElementById('subjectName').value,
+                soTinChi: parseInt(document.getElementById('credits').value),
+                teacherId: parseInt(document.getElementById('teacherId').value),
+                tenGiangVien: document.getElementById('teacherName').value,
+                ngayBatDau: document.getElementById('startDate').value,
+                ngayKetThuc: document.getElementById('endDate').value,
+                lichHocLyThuyet: [
+                    {
+                        thu: document.getElementById('day').value,
+                        tietHoc: document.getElementById('lesson').value,
+                        phongHoc: document.getElementById('classroom').value,
+                        loaiLich: document.getElementById('scheduleType').value,
+                        ghiChu: document.getElementById('note').value
+                    }
+                ],
+                lichHocThucHanh: [],
+                siSoHienTai: parseInt(document.getElementById('currentSize').value),
+                siSoToiDa: parseInt(document.getElementById('maxSize').value),
+                trangThai: document.getElementById('status').value
+            };
+
+            console.log('Form Data:', formData); // Debugging: Print form data to console
+
+            fetch('http://localhost:8080/api/admin/clazz/createClazz', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response Data:', data); // Debugging: Print response data to console
+                if (data.status === 'Success') {
+                    alert('Tạo lớp thành công');
+                    addRowToTable(data.data);
+                } else {
+                    alert('Tạo lớp thất bại');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Tạo lớp thất bại');
+            });
+        });
+
+        function addRowToTable(classData) {
+            const tableBody = document.querySelector('.create-table tbody');
+            const newRow = document.createElement('tr');
+
+            newRow.innerHTML = `
+                <td>${tableBody.rows.length + 1}</td>
+                <td>${classData.classId}</td>
+                <td>${classData.tenLop}</td>
+                <td>${classData.tenMonHoc}</td>
+                <td>${classData.tenGiangVien}</td>
+                <td>${classData.siSoHienTai}</td>
+                <td>${classData.siSoToiDa}</td>
+                <td>${classData.trangThai}</td>
+            `;
+
+            tableBody.appendChild(newRow);
+        }
+    </script>
+</body>
 </html>

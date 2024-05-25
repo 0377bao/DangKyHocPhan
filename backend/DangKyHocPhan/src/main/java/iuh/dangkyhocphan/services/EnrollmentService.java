@@ -44,6 +44,9 @@ public class EnrollmentService implements IService<Enrollment, Long>{
     public List<Enrollment> findEnrollmentOfStudent(Long id) {
         return repository.findEnrollmentOfStudent(id);
     }
+    public List<Enrollment> getEnrollmentByStudentIdAngSemester(Long id, String hocKi) {
+        return repository.getEnrollmentByStudentIdAngSemester(id, hocKi);
+    }
     public List<String> findSemesterOfStudent(Long id) {
         return repository.findSemesterOfStudent(id);
 
