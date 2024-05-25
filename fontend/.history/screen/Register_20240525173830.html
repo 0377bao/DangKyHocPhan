@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="../css/Register.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="../js/Home.js"></script>
+    <script src="../js/Register.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <!-- header -->
+        <div class="logo-banner">
+            <img src="../img/banner.png" alt="banner">
+        </div>
+
+        <!-- menu -->
+        <div class="menu">
+            <!-- Thông tin cá nhân -->
+            <div class="menu-personal">
+                <p>Xin chào!</p>
+                <p><h2>Lê Hữu Bằng</h2></p>
+                <p>Giới tính: </p>
+                <p>MSSV:</p>
+                <p>Trạng thái:</p>
+
+                <button type="submit" onclick="login()">Đăng xuất</button>
+            </div>
+
+            <div class="img-avatar">
+                <img src="../img/user.png" alt="user">
+            </div>
+
+            <!-- Menu đăng ký học phần -->
+            <div class="menu-item">
+                <a href="Home.html">THÔNG TIN SINH VIÊN</a> <br>
+                <a href="Register.html">ĐĂNG KÝ HỌC PHẦN</a> <br>
+                <a href="Curriculum.html">CHƯƠNG TRÌNH KHUNG</a>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="content">
+            <h2>ĐĂNG KÝ HỌC PHẦN</h2> <br>
+            <div class="content-both">
+                <!-- Đợt đăng ký -->
+                <div class="content-register">
+                    <b>Đợt đăng ký</b>
+
+                    <!-- Chọn học kỳ: -->
+                    <select id="semesterSelect" onchange="fetchCourseData(); fetchEnrollmentData();">
+                        <option value="1">HK1 (2021- 2022)</option>
+                        <option value="2">HK2 (2021- 2022)</option>
+                        <option value="3">HK3 (2021- 2022)</option>
+                    </select>
+
+                    <!-- Radio -->
+                    <input type="radio" id="hocMoi" name="gender" value="hocMoi" checked>
+                    <label for="hocMoi">HỌC MỚI</label>
+            
+                    <input type="radio" id="hocLai" name="gender" value="hocLai">
+                    <label for="hocLai">HỌC LẠI</label>
+            
+                    <input type="radio" id="hocCaiThien" name="gender" value="hocCaiThien">
+                    <label for="hocCaiThien">HỌC CẢI THIỆN</label>
+                </div>
+
+                <!-- Môn học phần đang chờ đăng ký -->
+                <div class="content-subject">
+                    <h3>MÔN HỌC PHẦN ĐANG CHỜ ĐĂNG KÝ</h3>
+                    <form action="" class="table-register">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ㅤㅤ</th>
+                                    <th>STT</th>
+                                    <th>Mã MH cũ</th>
+                                    <th>Mã HP</th>
+                                    <th>Tên môn học</th>
+                                    <th>TC</th>
+                                    <th>Bắt buộc</th>
+                                    <th>Học phần: học trước (a), tiên <br> quyết (b), song hành (c)</th>
+                                    <th>Học phần tương đương</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </form>
+                </div>
+
+                <div class="content-subject4" style="display: none;">
+                    <h3>LỚP HỌC PHẦN CHỜ ĐĂNG KÝ</h3>
+                    <form action="" class="table-register4">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ㅤㅤ</th>
+                                    <th>STT</th>
+                                    <th>Mã LHP</th>
+                                    <th>Tên Lớp học phần</th>
+                                    <th>Lớp dự kiến</th>
+                                    <th>Sĩ số tối đa</th>
+                                    <th>Đã đăng ký</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </form>
+                </div>
+
+                <div class="content-subject1" style="display: none;">
+                    <h3>CHI TIẾT LỚP HỌC PHẦN</h3>
+                    <div class="content-honestly">
+                        <label>Nhóm thực hành</label>
+                        <select id="practiceGroupSelect">
+                            <option value="1">ㅤㅤ</option>
+                            <option value="2">No results found</option>
+                        </select>
+                    </div>
+                    <form action="" class="table-register1">
+                        <table id="courseDetailTable">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Lịch học</th>
+                                    <th>Loại lịch</th>
+                                    <th>Phòng</th>
+                                    <th>Tiết học</th>
+                                    <th>Cơ sở</th>
+                                    <th>Giảng viên</th>
+                                    <th>ㅤㅤ</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </form>
+                
+                    <button type="button" class="register-subject" onclick="registerCourse()">Đăng ký môn học</button>
+                </div>
+
+                <div id="enrollment-container">
+                    <div class="content-subject2">
+                        <h3>LỚP HỌC PHẦN ĐÃ ĐĂNG KÝ TRONG KÌ HỌC NÀY (HK1)</h3>
+                        <form action="" class="table-register2">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Thao tác</th>
+                                        <th>STT</th>
+                                        <th>Mã LHP</th>
+                                        <th>Tên môn học</th>
+                                        <th>Lớp học dự kiến</th>
+                                        <th>Số TC</th>
+                                        <th>Nhóm TH</th>
+                                        <th>Học Phí</th>
+                                        <th>Hạn nộp</th>
+                                        <th>Thu</th>
+                                        <th>Trạng thái ĐK</th>
+                                        <th>Ngày Đk</th>
+                                        <th>Trạng Thái LHP</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="content-subject2">
+                        <h3>LỚP HỌC PHẦN ĐÃ ĐĂNG KÝ TRONG KÌ HỌC NÀY (HK2)</h3>
+                        <form action="" class="table-register3">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Thao tác</th>
+                                        <th>STT</th>
+                                        <th>Mã LHP</th>
+                                        <th>Tên môn học</th>
+                                        <th>Lớp học dự kiến</th>
+                                        <th>Số TC</th>
+                                        <th>Nhóm TH</th>
+                                        <th>Học Phí</th>
+                                        <th>Hạn nộp</th>
+                                        <th>Thu</th>
+                                        <th>Trạng thái ĐK</th>
+                                        <th>Ngày Đk</th>
+                                        <th>Trạng Thái LHP</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>                
+            </div> 
+        </div>
+
+         <!-- footer -->
+         <div class="footer">
+            <div class="left-footer">
+                <b>TRƯỜNG ĐẠI HỌC CÔNG NGHIỆP THÀNH PHỐ HỒ CHÍ MINH</b> <br>
+                <p>Địa chỉ: 12 Nguyễn Văn Bảo, phường 4, quận Gò Vấp, TP.Hồ Chí Minh </p> 
+                <p>Điện thoại: 0283 8940 390 </p>
+                <p>Fax: 0283 9940 954 </p> 
+                <p>Email: dhcn@iuh.edu.vn</p> 
+            </div>
+    
+            <div class="right-footer">
+                <p>Thống kê truy cập</p> 
+                <p>Lượt truy cập: 2038569</p> 
+                <p>Đang online: 345</p>
+            </div>
+        </div>
+
+        <div class="footer-butoom">
+            <p>Bảng quyền 2018 - Trường Đại học Công nghiệp TP. Hồ Chí Minh</p>
+        </div>
+
+    </div>
+</body>
+</html>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thông tin giảng viên</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <h2 class="text-center">Trần Văn Hiếu</h2>
+                <div class="info_teacher d-flex justify-content-between">
+                    <div class="left_info">
+                        <p>Mã nhân sự: <b></b></p>
+                        <p>Ngày sinh: <b></b></p>
+                        <p>Chức vụ: <b></b></p>
+                    </div>
+                    <div class="right_info">
+                        <p>Giới tính: <b></b></p>
+                        <p>Nơi sinh: <b></b></p>
+                        <p>Phòng ban: <b></b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>

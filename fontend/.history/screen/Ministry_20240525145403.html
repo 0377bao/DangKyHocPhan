@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ministry</title>
+    <link rel="stylesheet" type="text/css" href="../css/Register.css">
+</head>
+<body>
+    <div class="container">
+        <!-- header -->
+        <div class="logo-banner">
+            <img src="../img/banner.png" alt="banner">
+        </div>
+
+        <!-- menu -->
+        <div class="menu">
+            <!-- Thông tin cá nhân -->
+            <div class="menu-personal">
+                <p>Xin chào!</p>
+                <p><h3>Nguyễn Ngọc Phượng</h3></p>
+                <p>Giới tính:ㅤㅤㅤㅤNữ</p>
+                <p>SĐT:ㅤㅤㅤㅤㅤㅤ0964709810</p>
+                <p>Chức vụ:ㅤㅤㅤㅤGiáo vụ</p>
+
+                <button type="submit" onclick="logout()">Đăng xuất</button>
+            </div>
+
+            <div class="img-avatar">
+                <img src="../img/user.png" alt="user">
+            </div>
+
+            <!-- Menu đăng ký học phần -->
+            <div class="menu-item">
+                <a href="HomeMinistry.html">THÔNG TIN GIẢNG VIÊN</a> <br>
+                <a href="Ministry.html">TẠO LỚP HỌC PHẦN</a> <br>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="content">
+            <h2>TẠO LỚP HỌC PHẦN</h2> <br>
+            <div class="content-both">
+                <!-- Đợt tạo lớp -->
+                <div class="content-register">
+                    <b>Đợt tạo lớp</b>
+
+                    <!-- Chọn học kỳ: -->
+                    <select id="semesterSelect" onchange="fetchCourses()">
+                        <option value="Học kỳ 1 (2021-2022)">HK1 (2021- 2022)</option>
+                        <option value="Học kỳ 2 (2021-2022)">HK2 (2021- 2022)</option>
+                        <option value="Học kỳ 3 (2021-2022)">HK3 (2021- 2022)</option>
+                    </select>
+                </div>
+
+                <div class="content-subject">
+                    <h3>LỚP HỌC PHẦN</h3>
+                    <form action="" class="table-register">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ㅤㅤㅤㅤ</th>
+                                    <th>STT</th>
+                                    <th>administratorId</th>
+                                    <th>semesterId</th>
+                                    <th>Mã LHP</th>
+                                    <th>Tên lớp</th>
+                                    <th>Số tín chỉ</th>
+                                    <th>Mã GV</th>
+                                    <th>Tên giảng viên</th>
+                                </tr>
+                            </thead>
+                            <tbody id="classInfoTable"></tbody>
+
+                            <thead>
+                                <tr>
+                                    <th>Mã môn học</th>
+                                    <th>Tên môn học</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Ngày kết thúc</th>
+                                    <th>Lịch LT</th>
+                                    <th>Lịch TH</th>
+                                    <th>Sỉ số hiện tại</th>
+                                    <th>Sỉ số tối đa</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="classScheduleTable"></tbody>
+                        </table>
+                    </form>
+                    <button type="button" class="register-subject" onclick="createClass()">Tạo lớp học phần</button>
+                </div>
+
+                <div class="content-subject1">
+                    <h3>THÔNG TIN LỚP HỌC PHẦN</h3>
+                    <form action="" class="table-register1">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã LHP</th>
+                                    <th>Tên Lớp học phần</th>
+                                    <th>Lịch học</th>
+                                    <th>Phòng</th>
+                                    <th>Dãy nhà</th>
+                                    <th>Giảng viên</th>
+                                    <th>Lớp dự kiến</th>
+                                    <th>Sĩ số tối đa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="classDetailsTable"></tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div class="footer">
+            <div class="left-footer">
+                <b>TRƯỜNG ĐẠI HỌC CÔNG NGHIỆP THÀNH PHỐ HỒ CHÍ MINH</b> <br>
+                <p>Địa chỉ: 12 Nguyễn Văn Bảo, phường 4, quận Gò Vấp, TP.Hồ Chí Minh </p>
+                <p>Điện thoại: 0283 8940 390 </p>
+                <p>Fax: 0283 9940 954 </p>
+                <p>Email: dhcn@iuh.edu.vn</p>
+            </div>
+
+            <div class="right-footer">
+                <p>Thống kê truy cập</p>
+                <p>Lượt truy cập: 1000</p>
+                <p>Đang online: 34</p>
+            </div>
+        </div>
+
+        <div class="footer-butoom">
+            <p>Bảng quyền 2018 - Trường Đại học Công nghiệp TP. Hồ Chí Minh</p>
+        </div>
+
+    </div>
+
+    <script>
+        let teachers = [];
+        let classData = [];
+
+        document.addEventListener("DOMContentLoaded", function () {
+            getInfoAdministrator();
+            fetchTeachers();
+            fetchClassData();
+        });
+
+        function logout() {
+            window.location.href = "LoginMinistry.html";
+        }
+
+        function fetchTeachers() {
+            fetch('http://localhost:8080/api/admin/teachers')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "Success") {
+                        teachers = data.data;
+                        populateTeachers(teachers);
+                    } else {
+                        console.error('Failed to fetch teachers:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching teachers:', error);
+                });
+        }
+
+        function populateTeachers(teachers) {
+            const teacherSelect = document.createElement('select');
+            teacherSelect.id = 'teacherSelect';
+            teachers.forEach(teacher => {
+                const option = document.createElement('option');
+                option.value = teacher.maGiangVien;
+                option.textContent = teacher.tenGiangVien;
+                teacherSelect.appendChild(option);
+            });
+            document.querySelector('.content-register').appendChild(teacherSelect);
+        }
+
+        function fetchCourses() {
+            const semesterText = document.getElementById('semesterSelect').value;
+            fetch(`http://localhost:8080/api/admin/courses?hocKy=${encodeURIComponent(semesterText)}&khoa=CNTT`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "Success") {
+                        populateCourses(data.data);
+                    } else {
+                        console.error('Failed to fetch courses:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching courses:', error);
+                });
+        }
+
+        function populateCourses(courses) {
+            const classInfoTable = document.getElementById('classInfoTable');
+            classInfoTable.innerHTML = ''; // Clear previous data
+            const classScheduleTable = document.getElementById('classScheduleTable');
+            classScheduleTable.innerHTML = ''; // Clear previous data
+
+            courses.forEach((course, index) => {
+                const teacher = teachers[index % teachers.length]; // Assign teachers cyclically or based on any logic
+                const classInfoRow = document.createElement('tr');
+                classInfoRow.innerHTML = `
+                    <td><input type="radio"  name="dk" ></td>
+                    <td>${index + 1}</td>
+                    <td>1</td>
+                    <td>${document.getElementById('semesterSelect').value}</td>
+                    <td>${course.id}</td>
+                    <td>${course.tenMonHoc}</td>
+                    <td>${course.soTinChi}</td>
+                    <td>${teacher.maGiangVien}</td>
+                    <td>${teacher.tenGiangVien}</td>
+                `;
+                classInfoTable.appendChild(classInfoRow);
+
+                const classScheduleRow = document.createElement('tr');
+                classScheduleRow.innerHTML = `
+                    <td>${course.id}</td>
+                    <td>${course.tenMonHoc}</td>
+                    <td>2021/08/10</td>
+                    <td>2022/05/30</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>0</td>
+                    <td>50</td>
+                    <td>Chờ đăng ký</td>
+                `;
+                classScheduleTable.appendChild(classScheduleRow);
+            });
+        }
+
+        function fetchClassData() {
+            fetch('http://localhost:8080/api/admin/clazz/')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "Success") {
+                        classData = data.data;
+                        populateClassData(classData);
+                    } else {
+                        console.error('Failed to fetch class data:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching class data:', error);
+                });
+        }
+
+        function getInfoAdministrator() {
+            const infoPersonal = document.querySelector(".menu-personal")
+            const idAdmin = localStorage.getItem("loggerInUser")
+            fetch('http://localhost:8080/api/admin/Info/${idAdmin}')
+                .then(response =>{
+                    if(response.status === "Success")
+                        response.data.json()
+                    else return response.message
+                })
+                .then(dataAdmin => {
+                    let html = `
+                    <p>Xin chào!</p>
+                    <p><h3>${dataAdmin.hoTen}</h3></p>
+                    <p>Giới tính:ㅤㅤㅤㅤ${dataAdmin.gioiTinh == true ? "Name" : "Nữ"}</p>
+                    <p>SĐT:ㅤㅤㅤㅤㅤㅤ${dataAdmin.sdt}</p>
+                    <p>Chức vụ:ㅤㅤㅤㅤGiáo vụ</p>
+                    `
+                    infoPersonal.appendChild(html)
+                })
+        }
+    </script>
+</body>
+</html>

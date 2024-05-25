@@ -40,4 +40,8 @@ public class TeacherService implements IService<Teacher, Long>{
     public boolean existsById(Long id) {
         return repository.existsById(id);
     }
+
+    public Teacher findTeacherByClassId(Long classId) {
+        return repository.findTeacherByClassId(classId);
+    }
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeMinistry</title>
+    <link rel="stylesheet" type="text/css" href="../css/HomeMinistry.css">
+</head>
+<body>
+    <div class="container">
+        <!-- header -->
+        <div>
+            <img src="../img/banner.png" alt="banner">
+        </div>
+
+        <!-- menu -->
+        <div class="menu">
+            <!-- Thông tin cá nhân -->
+            <div class="menu-personal">
+                <p>Xin chào!</p>
+                <p><h3 id="teacherName">Nguyễn Ngọc Phượng</h3></p>
+                <p>Giới tính:ㅤㅤㅤㅤ<span id="teacherGender">Nữ</span></p>
+                <p>SĐT:ㅤㅤㅤㅤㅤㅤ<span id="teacherPhone">0964709810</span></p>
+                <p>Chức vụ:ㅤㅤㅤㅤ<span id="teacherPosition">Giáo vụ</span></p>
+ 
+                <button type="submit" onclick="logout()">Đăng xuất</button>
+            </div>
+ 
+            <div class="img-avatar">
+                <img src="../img/user.png" alt="user">
+            </div>
+ 
+             <!-- Menu đăng ký học phần -->
+             <div class="menu-item">
+                 <a href="HomeMinistry.html">THÔNG TIN GIẢNG VIÊN</a> <br>
+                 <a href="Ministry.html">TẠO LỚP HỌC PHẦN</a> <br>
+             </div>
+         </div>
+
+        <!-- content -->
+        <div class="content">
+            <h2>THÔNG TIN GIẢNG VIÊN</h2> <br>
+            <div class="content-both">
+                <div class="content-left">
+                    <p>Vị trí công tác: <b id="teacherDepartment">Khoa công nghệ thông tin</b></p>
+                    <p>Chức vụ: <b id="teacherRole">Giáo vụ</b></p>
+                    <p>Gmail: <b id="teacherEmail">saonkoliver@iuh.edu.vn</b></p>
+                    <p>Địa chỉ: <b id="teacherAddress">12 Nguyễn Văn Bảo, phường 4 Gò Vấp, Thành phố Hồ Chí Minh</b></p>
+                 </div>
+     
+                 <div class="content-right">
+                     <p>Chức danh: <b id="teacherDegree">Đại học</b></p>
+                     <p>Ngoại ngữ: <b id="teacherLanguage">English</b></p>
+                     <p>Chuyên ngành: <b id="teacherMajor">Công nghệ thông tin</b></p>
+                     <p>Cơ sở: <b id="teacherCampus">Cơ sở 1 (Thành phố Hồ Chí Minh)</b></p>
+                 </div>
+            </div> 
+        </div>
+
+         <!-- footer -->
+         <div class="footer">
+            <div class="left-footer">
+                <b>TRƯỜNG ĐẠI HỌC CÔNG NGHIỆP THÀNH PHỐ HỒ CHÍ MINH</b> <br>
+                <p>Địa chỉ: 12 Nguyễn Văn Bảo, phường 4, quận Gò Vấp, TP.Hồ Chí Minh </p> 
+                <p>Điện thoại: 0283 8940 390 </p>
+                <p>Fax: 0283 9940 954 </p> 
+                <p>Email: dhcn@iuh.edu.vn</p> 
+            </div>
+    
+            <div class="right-footer">
+                <p>Thống kê truy cập</p> 
+                <p>Lượt truy cập: 1000</p> 
+                <p>Đang online: 34</p>
+            </div>
+        </div>
+
+        <div class="footer-butoom">
+            <p>Bảng quyền 2018 - Trường Đại học Công nghiệp TP. Hồ Chí Minh</p>
+        </div>
+
+    </div>
+
+    <script src="../js/Ministry.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = "LoginMinistry.html";
+        }
+    </script>
+</body>
+</html>

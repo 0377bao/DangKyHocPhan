@@ -225,6 +225,8 @@ public class EnrollmentController {
             result.put("phongHoc", schedule.getPhongHoc());
             result.put("tenGiangVien", schedule.getClazz().getGiangVien().getHoTen());
             result.put("loaiLich", schedule.getLoaiLich());
+            result.put("ngayBatDau", schedule.getClazz().getNgayBatDau());
+            result.put("ngayKetThuc", schedule.getClazz().getNgayKetThuc());
             if(schedule.getLoaiLich().equals("Trực tuyến"))
                 result.put("ghiChu", schedule.getGhiChu());
             dsLop.add(result);
