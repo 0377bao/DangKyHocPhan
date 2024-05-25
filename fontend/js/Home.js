@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const menuPersonal = document.querySelector('.menu-personal');
         menuPersonal.innerHTML = `
             <p>Xin chào!</p>
-            <p><h2>${student.hoTen}</h2></p>
+            <p><h2 class="content-name">${student.hoTen}</h2></p>
             <p>Giới tính: ${student.gioiTinh ? 'Nam' : 'Nữ'}</p>
             <p>MSSV: ${student.id}</p>
             <p>Trạng thái: ${student.trangThai}</p>
@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
         // update name student
         const nameStudent = document.querySelector('.content-name');
         nameStudent.innerHTML = `SINH VIÊN: ${student.hoTen.toUpperCase()}`;
-
         // Updating content-left section
         const contentLeft = document.querySelector('.content-left');
         contentLeft.innerHTML = `

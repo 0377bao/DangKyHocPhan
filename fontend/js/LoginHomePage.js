@@ -18,7 +18,7 @@ function login() {
         return;
     }
 
-    const url = `http://localhost:8080/api/user/login/accounts?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+    const url = `http://localhost:8080/api/user/login/accounts?username=${encodeURIComponent(username)}&password=${encodeURIComponent(md5(password))}`;
 
     fetch(url)
         .then(response => {

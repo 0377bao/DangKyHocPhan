@@ -336,13 +336,14 @@ function getDetailsInfoTeacher(classId) {
                     </div>
                 </div>
             `
-            containerModel.innerHTML += html
+            containerModel.innerHTML = html
         })
 }
 
-function getAllScheduleDuplicateOfStudent(studentID, classID, semester) {
+function getAllScheduleDuplicateOfStudent() {
+    const semesterId = document.getElementById('semesterSelect').value;
     const tbodyTable = document.querySelector(".list_schedule")
-    fetch(`http://localhost:8080/api/dkhp/Enrollment/checkForDuplicateSchedule?studentId=${encodeURIComponent(studentID)}&classId=${encodeURIComponent(classID)}&hocKi=${encodeURIComponent(semester)}`)
+    fetch(`http://localhost:8080/api/dkhp/Enrollment/checkForDuplicateSchedule?studentId=${encodeURIComponent(userId)}&classId=${encodeURIComponent(selectedClassId)}&hocKi=${encodeURIComponent(semesterId)}`)
         .then(response => response.json())
         .then(data =>{
             if(data.success == "Failed") alert("Not find schedule duplicated")
@@ -360,7 +361,7 @@ function getAllScheduleDuplicateOfStudent(studentID, classID, semester) {
                         </tr>
                     `
                 })
-                tbodyTable.innerHTML += html.join(" ")
+                tbodyTable.innerHTML = html.join(" ")
             }
         } )
 }
