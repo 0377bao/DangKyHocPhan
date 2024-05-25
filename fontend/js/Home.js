@@ -27,6 +27,10 @@ document.addEventListener("DOMContentLoaded", function() {
             <button type="submit" onclick="login()">Đăng xuất</button>
         `;
 
+        // update name student
+        const nameStudent = document.querySelector('.content-name');
+        nameStudent.innerHTML = `SINH VIÊN: ${student.hoTen.toUpperCase()}`;
+
         // Updating content-left section
         const contentLeft = document.querySelector('.content-left');
         contentLeft.innerHTML = `

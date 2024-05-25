@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +38,18 @@ public class TeacherController {
         });
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("Success", "List of all teachers", dsGiangVien)
+        );
+    }
+    @GetMapping("/getTeacherDetail/{classId}")
+    public ResponseEntity<ResponseObject> getTeacherDetailByClassId(@PathVariable Long classId) {
+        Teacher teacher = teacherService.findTeacherByClassId(classId);
+        if (teacher == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ResponseObject("Failed", "Can't find teacher by class id " + classId, "")
+            );
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("Success", "Get teacher detail by class id " + classId + " success", teacher)
         );
     }
 }

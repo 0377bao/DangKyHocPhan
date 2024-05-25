@@ -114,7 +114,7 @@ body {
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 20px;
-    line-height: 1.8em;
+    line-height: 1.5em;
 }
 
 .table-subject table {
@@ -132,15 +132,14 @@ body {
 .table-subject tbody {
     background-color: #fff;
     color: #3d3d3d;
-    font-weight: bold;
 }
 
 .table-subject th,
 .table-subject td {
     padding: 10px;
     text-align: center;
-    background-color: #FFFFCE;
     border: 1px solid #ddd;
+    vertical-align: top;
 }
 
 .content-note {
@@ -264,4 +263,35 @@ body {
         color: #667580;
         font-size: 15px;
     }
+}
+
+.block {
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.block--theory {
+    background-color: #e7ecf0;
+    border: 1px solid #c9d0db;
+}
+
+.block--practice {
+    background-color: #71cb35;
+    border-color: #c9d0db;
+}
+
+.block--online {
+    background-color: #92d6ff;
+    border-color: #1da1f2;
+}
+
+.course-name {
+    font-weight: bold;
+}
+
+td.block-sesstion {
+    background-color: #FFFFCE;
+    vertical-align: inherit;
 }

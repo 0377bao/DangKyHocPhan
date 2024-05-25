@@ -11,4 +11,5 @@ import java.util.List;
 
 @Repository
 public interface CourseOpeningRepository extends JpaRepository<CourseOpening, Long>{
+    CourseOpening findCourseOpeningByhocky(String hocky);
 }

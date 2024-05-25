@@ -2,6 +2,7 @@ package iuh.dangkyhocphan.models;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "classes")
@@ -17,6 +18,8 @@ public class Clazz implements Serializable {
     private int siSoHienTai;
     private int siSoToiDa;
     private String trangThai;
+    private LocalDate ngayBatDau;
+    private LocalDate ngayKetThuc;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
     private Course course;
@@ -33,6 +36,8 @@ public class Clazz implements Serializable {
                 ", siSoHienTai=" + siSoHienTai +
                 ", siSoToiDa=" + siSoToiDa +
                 ", trangThai='" + trangThai + '\'' +
+                ", ngayBatDau=" + ngayBatDau +
+                ", ngayKetThuc=" + ngayKetThuc +
                 ", course=" + course +
                 ", administrator=" + administrator +
                 '}';
@@ -102,15 +107,33 @@ public class Clazz implements Serializable {
         this.administrator = administrator;
     }
 
+    public LocalDate getNgayBatDau() {
+        return ngayBatDau;
+    }
+
+    public void setNgayBatDau(LocalDate ngayBatDau) {
+        this.ngayBatDau = ngayBatDau;
+    }
+
+    public LocalDate getNgayKetThuc() {
+        return ngayKetThuc;
+    }
+
+    public void setNgayKetThuc(LocalDate ngayKetThuc) {
+        this.ngayKetThuc = ngayKetThuc;
+    }
+
     public Clazz() {
     }
 
-    public Clazz(String tenLop, Teacher giangVien, int siSoHienTai, int siSoToiDa, String trangThai, Course course, Administrator administrator) {
+    public Clazz(String tenLop, Teacher giangVien, int siSoHienTai, int siSoToiDa, String trangThai, LocalDate ngayBatDau, LocalDate ngayKetThuc, Course course, Administrator administrator) {
         this.tenLop = tenLop;
         this.giangVien = giangVien;
         this.siSoHienTai = siSoHienTai;
         this.siSoToiDa = siSoToiDa;
         this.trangThai = trangThai;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
         this.course = course;
         this.administrator = administrator;
     }
