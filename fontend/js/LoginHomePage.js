@@ -32,6 +32,7 @@ function login() {
                 // Store the user ID in localStorage
                 localStorage.setItem('userId', username);
                 window.location.href = "HomePage.html";
+                // console.log('Login successful');
             } else {
                 if (data.message.includes("password")) {
                     showError(passwordError, 'Mật khẩu không đúng');
